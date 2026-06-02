@@ -1,0 +1,436 @@
+/* ==========================
+   Global Styles
+========================== */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+img{
+    max-width: 100%;
+    display: block;
+}
+
+/* ==========================
+   Navbar
+========================== */
+
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff !important;
+    padding: 12px 50px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #06275a !important;
+}
+
+.navbar-brand img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.navbar-nav{
+    margin-left: auto;
+    gap: 30px;
+}
+
+.navbar-nav .nav-link{
+    color: #4a5578 !important;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active{
+    color: #06275a !important;
+}
+
+.dropdown-menu{
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.dropdown-item:hover{
+    background: #f3f8ff;
+    color: #06275a;
+}
+
+/* ==========================
+   Hero Section
+========================== */
+
+.hero{
+    position: relative;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dark Overlay */
+
+.hero::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-content{
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: white;
+    max-width: 650px;
+    z-index: 2;
+}
+
+.hero-content h1{
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-content p{
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-content .btn{
+    background: #06275a;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.hero-content .btn:hover{
+    background: #0b3f8f;
+}
+
+/* ==========================
+   Destinations Section
+========================== */
+
+.destinations-section{
+    padding: 100px 8%;
+    background: #f7f9fc;
+}
+
+.section-title{
+    text-align: center;
+    font-size: 2.8rem;
+    color: #06275a;
+    margin-bottom: 60px;
+    font-weight: 700;
+}
+
+.destination-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.destination-card{
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.destination-card:hover{
+    transform: translateY(-8px);
+}
+
+.destination-card img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Top Blue Name Bar */
+
+.place-tag{
+    background: #06275a;
+    color: #FFD700;
+    text-align: center;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Bottom White Name */
+
+.place-name{
+    background: white;
+    color: #06275a;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width: 992px){
+
+    .navbar{
+        padding: 12px 20px;
+    }
+
+    .navbar-nav{
+        gap: 10px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .hero-content h1{
+        font-size: 2.8rem;
+    }
+
+    .destination-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 768px){
+
+    .hero{
+        height: 75vh;
+    }
+
+    .hero-content{
+        left: 5%;
+        max-width: 90%;
+    }
+
+    .hero-content h1{
+        font-size: 2rem;
+    }
+
+    .hero-content p{
+        font-size: 1rem;
+    }
+
+    .destination-grid{
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================
+   Itinerary Section
+========================== */
+
+.itinerary-section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f9fafc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.itinerary-section h2 {
+  text-align: center;
+  color: #06275a; /* matches navbar theme */
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+input[type="text"], input[type="date"] {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* General Button Styles */
+.btn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, opacity 0.3s ease;
+  font-weight: 600;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Booking Button */
+.booking-btn {
+  background: #0d3b66; /* dark blue */
+  color: #fff;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background: #b22222; /* dark red */
+  color: #fff;
+  margin-top: 1rem;
+}
+
+/* Agent Buttons */
+.agent-card .available-btn {
+  background: #228b22; /* green */
+  color: #fff;
+}
+
+.agent-card .available-btn:hover {
+  background: #1a661a; /* darker green on hover */
+}
+
+.agent-card .unavailable-btn {
+  background: #b22222; /* red */
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Agent Card Layout */
+.agent-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+/*--------- packages--------- */
+.packages-section{
+    padding:60px 5%;
+    background:#f8f9fa;
+}
+
+.packages-section h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#06275a;
+    font-size:2rem;
+}
+
+.packages-container{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding-bottom:15px;
+}
+
+.packages-container::-webkit-scrollbar{
+    height:8px;
+}
+
+.packages-container::-webkit-scrollbar-thumb{
+    background:#06275a;
+    border-radius:10px;
+}
+
+.package-card{
+    min-width:300px;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    transition:0.3s;
+    flex-shrink:0;
+}
+
+.package-card:hover{
+    transform:translateY(-8px);
+}
+
+.package-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.package-card h3{
+    padding:10px 15px 5px;
+    color:#06275a;
+}
+
+.package-card p{
+    padding:0 15px;
+    margin:8px 0;
+}
+
+.price{
+    color:#28a745;
+    font-weight:bold;
+    font-size:1.1rem;
+}
+
+.package-btn{
+    width:calc(100% - 30px);
+    margin:15px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#06275a;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.package-btn:hover{
+    background:#0d3b66;
+}
+.pakg-hea{
+    text-align:center;
+    color:#06275a;
+    margin-bottom:30px;
+    font-size:2.5rem;
+}
