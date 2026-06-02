@@ -434,3 +434,166 @@ input[type="text"], input[type="date"] {
     margin-bottom:30px;
     font-size:2.5rem;
 }
+/* ==========================
+   Ratings Section
+========================== */
+
+.ratings-section{
+    padding:60px 5%;
+    background:#f8f9fa;
+}
+
+.ratings-section h2{
+    text-align:center;
+    color:#06275a;
+    margin-bottom:30px;
+    font-size:2rem;
+}
+
+.ratings-container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+}
+
+.rating-box{
+    background:#ffffff;
+    width:220px;
+    padding:25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.rating-box:hover{
+    transform:translateY(-8px);
+}
+
+.rating-box h3{
+    color:#06275a;
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.rating-box p{
+    color:#555;
+    font-size:1rem;
+    margin:0;
+}
+/* ==========================
+   Travel Testimonials
+========================== */
+
+.section{
+    padding: 60px 5%;
+    background: #f8f9fa;
+}
+
+.section-title{
+    text-align: center;
+    color: #06275a;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.three-grid{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.testimonial{
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.testimonial img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.name{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #06275a;
+    margin-bottom: 10px;
+}
+
+.quote{
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.stars{
+    color: #f4b400;
+    font-size: 1.2rem;
+}
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 50px 10%;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-box {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-box h3,
+.footer-box h4 {
+  margin-bottom: 15px;
+  color: #00bcd4;
+}
+
+.footer-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.footer-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-box ul li {
+  margin-bottom: 8px;
+}
+
+.footer-box ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-box ul li a:hover {
+  color: #00bcd4;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
