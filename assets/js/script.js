@@ -1,177 +1,226 @@
-// Grab elements
-const planningTypeInputs = document.querySelectorAll('input[name="planningType"]');
-const activitiesSection = document.getElementById('activitiesSection');
-const agentSection = document.getElementById('agentSection');
-const agentCardsContainer = document.getElementById('agentCards');
-const bookAgentBtn = document.getElementById('bookAgentBtn');
-const tripForm = document.getElementById('tripForm');
-const confirmationCard = document.getElementById('confirmationCard');
-const cancelBtn = document.getElementById('cancelBtn');
-
-let selectedAgent = null;
-
-// Sample agent data
-const agents = [
-  { name: "Rahul Sharma", rating: 4.8, experience: "5 Years", status: "Available", fee: "₹2500", contact: "9876543210" },
-  { name: "Priya Verma", rating: 4.9, experience: "8 Years", status: "Busy", fee: "₹3500", contact: "9876543211" },
-  { name: "Amit Singh", rating: 4.7, experience: "6 Years", status: "Available", fee: "₹3000", contact: "9876543212" }
+// ===== Agent Data =====
+var agents = [
+  { name: "Rahul Sharma", rating: "4.8 ★", exp: "5 Years", fee: "₹2,500", contact: "+91 98765 43210", avail: true },
+  { name: "Priya Verma",  rating: "4.9 ★", exp: "8 Years", fee: "₹3,500", contact: "+91 98765 43211", avail: false },
+  { name: "Amit Singh",   rating: "4.7 ★", exp: "6 Years", fee: "₹3,000", contact: "+91 98765 43212", avail: true },
+  { name: "Sneha Iyer",   rating: "4.6 ★", exp: "4 Years", fee: "₹2,200", contact: "+91 98765 43213", avail: true },
+  { name: "Karan Mehta",  rating: "4.9 ★", exp: "10 Years",fee: "₹4,000", contact: "+91 98765 43214", avail: false }
 ];
 
-// Toggle sections when planning type changes
-planningTypeInputs.forEach(input => {
-  input.addEventListener('change', () => {
-    if (input.value === 'self') {
-      // Show activities, hide agents
-      activitiesSection.classList.remove('hidden');
-      agentSection.classList.add('hidden');
-    }
-    if (input.value === 'agent') {
-      // Show agents, hide activities
-      activitiesSection.classList.add('hidden');
-      agentSection.classList.remove('hidden');
-      renderAgents();
-    }
-    // Reset state
-    confirmationCard.classList.add('hidden');
-    cancelBtn.classList.add('hidden');
+// ===== Selected Agent Variable =====
+var selectedAgent = null;
+
+// ===== Get Elements =====
+var activitiesSection = document.getElementById("activitiesSection");
+var agentSection      = document.getElementById("agentSection");
+var agentCards        = document.getElementById("agentCards");
+var tripForm          = document.getElementById("tripForm");
+var confirmationCard  = document.getElementById("confirmationCard");
+var cancelBtn         = document.getElementById("cancelBtn");
+
+// ===== Radio Button Change =====
+var radios = document.querySelectorAll('input[name="planType"]');
+
+radios.forEach(function(radio) {
+  radio.addEventListener("change", function() {
+
+    // Hide both sections first
+    activitiesSection.classList.add("hidden");
+    agentSection.classList.add("hidden");
+
+    // Reset confirmation
+    confirmationCard.classList.add("hidden");
+    cancelBtn.classList.add("hidden");
     selectedAgent = null;
+
+    // Show the right section
+    if (this.value === "self") {
+      activitiesSection.classList.remove("hidden");
+    }
+
+    if (this.value === "agent") {
+      agentSection.classList.remove("hidden");
+      showAgentCards();
+    }
+
   });
 });
 
-// Render agent cards
-function renderAgents() {
-  agentCardsContainer.innerHTML = '';
-  agents.forEach(agent => {
-    const card = document.createElement('div');
-    card.classList.add('agent-card');
-    card.innerHTML = `
-      <h4>${agent.name}</h4>
-      <p>⭐ Rating: ${agent.rating}</p>
-      <p>Experience: ${agent.experience}</p>
-      <p>Status: ${agent.status}</p>
-      <p>Fee: ${agent.fee}</p>
-      <button class="btn ${agent.status === "Available" ? "available-btn" : "unavailable-btn"}"
-        ${agent.status !== "Available" ? "disabled" : ""}>
-        ${agent.status === "Available" ? "Select Agent" : "Not Available"}
-      </button>
-    `;
-    const selectBtn = card.querySelector('button');
-    selectBtn.addEventListener('click', () => {
-      if (agent.status === "Available") {
-        selectedAgent = agent;
-        alert(`${agent.name} selected!`);
-      }
-    });
-    agentCardsContainer.appendChild(card);
-  });
+// ===== Show Agent Cards Function =====
+function showAgentCards() {
+  agentCards.innerHTML = "";
+
+  for (var i = 0; i < agents.length; i++) {
+    var ag = agents[i];
+
+    var card = document.createElement("div");
+    card.className = "agent-card" + (ag.avail ? "" : " busy");
+
+    card.innerHTML =
+      "<span class='badge " + (ag.avail ? "badge-available" : "badge-busy") + "'>" +
+        (ag.avail ? "AVAILABLE" : "BUSY") +
+      "</span>" +
+      "<h4>" + ag.name + "</h4>" +
+      "<p>" + ag.rating + "</p>" +
+      "<p>" + ag.exp + " experience</p>" +
+      "<p class='fee'>" + ag.fee + "</p>";
+
+    // Only allow click if agent is available
+    if (ag.avail) {
+      card.addEventListener("click", (function(agent, cardEl) {
+        return function() {
+          // Remove selected from all cards
+          var allCards = document.querySelectorAll(".agent-card");
+          allCards.forEach(function(c) { c.classList.remove("selected"); });
+
+          // Select this card
+          cardEl.classList.add("selected");
+          selectedAgent = agent;
+        };
+      })(ag, card));
+    }
+
+    agentCards.appendChild(card);
+  }
 }
 
-// Book Agent for "Plan Yourself"
-bookAgentBtn.addEventListener('click', () => {
-  selectedAgent = agents.find(agent => agent.status === "Available");
-  if (selectedAgent) {
-    alert(`${selectedAgent.name} assigned as your agent!`);
-  } else {
-    alert("No agents available at the moment.");
-  }
-});
-
-// Handle form submission
-tripForm.addEventListener('submit', (e) => {
+// ===== Form Submit =====
+tripForm.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const destination = document.getElementById('destination').value.trim();
-  const fromDate = document.getElementById('fromDate').value;
-  const toDate = document.getElementById('toDate').value;
-  const planningType = document.querySelector('input[name="planningType"]:checked')?.value;
+  // Get form values
+  var destination = document.getElementById("destination").value.trim();
+  var email       = document.getElementById("email").value.trim();
+  var fromDate    = document.getElementById("fromDate").value;
+  var toDate      = document.getElementById("toDate").value;
+  var planType    = document.querySelector('input[name="planType"]:checked');
 
-  if (!destination || !fromDate || !toDate || !planningType) {
-    alert("Please fill all required fields.");
+  // Simple validation
+  if (destination === "") {
+    alert("Please enter a destination.");
+    return;
+  }
+  if (email === "") {
+    alert("Please enter your email.");
+    return;
+  }
+  if (fromDate === "") {
+    alert("Please select a from date.");
+    return;
+  }
+  if (toDate === "") {
+    alert("Please select a to date.");
+    return;
+  }
+  if (planType === null) {
+    alert("Please select a planning type.");
     return;
   }
 
-  let bookingData = { destination, fromDate, toDate, planningType, activities: [], agent: null };
-
-  if (planningType === 'self') {
-    const selectedActivities = Array.from(activitiesSection.querySelectorAll('input[type="checkbox"]:checked'))
-      .map(cb => cb.value);
-
-    if (!selectedAgent) {
-      alert("Please assign an agent by clicking 'Book Agent'.");
-      return;
-    }
-
-    bookingData.activities = selectedActivities;
-    bookingData.agent = selectedAgent;
-
-    confirmationCard.innerHTML = `
-      <h3>Booking Confirmed!</h3>
-      <p><strong>Destination:</strong> ${destination}</p>
-      <p><strong>From:</strong> ${fromDate}</p>
-      <p><strong>To:</strong> ${toDate}</p>
-      <p><strong>Activities:</strong> ${selectedActivities.join(", ") || "None"}</p>
-      <p><strong>Agent:</strong> ${selectedAgent.name}</p>
-      <p><strong>Contact:</strong> ${selectedAgent.contact}</p>
-      <p><strong>Fee:</strong> ${selectedAgent.fee}</p>
-      <p class="success">✅ Your agent will contact you soon!</p>
-    `;
+  // If agent plan — must select agent
+  if (planType.value === "agent" && selectedAgent === null) {
+    alert("Please select an agent.");
+    return;
   }
 
-  if (planningType === 'agent') {
-    if (!selectedAgent) {
-      alert("Please select an agent.");
-      return;
+  // If self plan — auto assign first available agent
+  if (planType.value === "self") {
+    for (var i = 0; i < agents.length; i++) {
+      if (agents[i].avail) {
+        selectedAgent = agents[i];
+        break;
+      }
     }
-
-    bookingData.agent = selectedAgent;
-
-    confirmationCard.innerHTML = `
-      <h3>Booking Confirmed!</h3>
-      <p><strong>Destination:</strong> ${destination}</p>
-      <p><strong>From:</strong> ${fromDate}</p>
-      <p><strong>To:</strong> ${toDate}</p>
-      <p><strong>Agent:</strong> ${selectedAgent.name}</p>
-      <p><strong>Contact:</strong> ${selectedAgent.contact}</p>
-      <p><strong>Fee:</strong> ${selectedAgent.fee}</p>
-      <p class="success">✅ Your agent will contact you within 24 hours!</p>
-    `;
   }
 
-  localStorage.setItem("tripBooking", JSON.stringify(bookingData));
-  confirmationCard.classList.remove('hidden');
-  cancelBtn.classList.remove('hidden');
+  // Get selected activities
+  var checkboxes = document.querySelectorAll("#activitiesSection input[type='checkbox']:checked");
+  var activities = [];
+  checkboxes.forEach(function(cb) {
+    activities.push(cb.value);
+  });
+
+  // Build confirmation card HTML
+  var activitiesText = activities.length > 0 ? activities.join(", ") : "None selected";
+
+  confirmationCard.innerHTML =
+    "<h3>✅ Booking Confirmed!</h3>" +
+
+    "<p>Destination: <span>" + destination + "</span></p>" +
+    "<p>Email: <span>" + email + "</span></p>" +
+    "<p>From: <span>" + fromDate + "</span></p>" +
+    "<p>To: <span>" + toDate + "</span></p>" +
+    "<p>Plan Type: <span>" + (planType.value === "self" ? "Plan Yourself" : "Through Agent") + "</span></p>" +
+
+    (planType.value === "self" ?
+      "<p>Activities: <span>" + activitiesText + "</span></p>" : "") +
+
+    "<hr style='border-color:rgba(255,255,255,0.15); margin:12px 0'>" +
+
+    "<p>Agent Name: <span>" + selectedAgent.name + "</span></p>" +
+    "<p>Contact: <span>" + selectedAgent.contact + "</span></p>" +
+    "<p>Fee: <span>" + selectedAgent.fee + "</span></p>" +
+
+    "<div class='alert-msg'>📞 " + selectedAgent.name + " will call you within 24 hours to finalise your itinerary.</div>";
+
+  // Show confirmation and cancel button
+  confirmationCard.classList.remove("hidden");
+  cancelBtn.classList.remove("hidden");
+
+  // Scroll down to show it
+  confirmationCard.scrollIntoView({ behavior: "smooth" });
+
+  // Save to localStorage
+  localStorage.setItem("tripBooking", JSON.stringify({
+    destination: destination,
+    email: email,
+    fromDate: fromDate,
+    toDate: toDate,
+    activities: activities,
+    agent: selectedAgent
+  }));
+
 });
 
-// Cancel itinerary
-cancelBtn.addEventListener('click', () => {
+// ===== Cancel Button =====
+cancelBtn.addEventListener("click", function() {
+  // Clear localStorage
   localStorage.removeItem("tripBooking");
-  confirmationCard.classList.add('hidden');
-  cancelBtn.classList.add('hidden');
+
+  // Hide confirmation and cancel button
+  confirmationCard.classList.add("hidden");
+  cancelBtn.classList.add("hidden");
+
+  // Reset the form
   tripForm.reset();
-  activitiesSection.classList.add('hidden');
-  agentSection.classList.add('hidden');
+
+  // Hide activity and agent sections
+  activitiesSection.classList.add("hidden");
+  agentSection.classList.add("hidden");
+
+  // Reset selected agent
   selectedAgent = null;
+
   alert("Your itinerary has been cancelled.");
 });
 
-// Load previous booking
-window.addEventListener("DOMContentLoaded", () => {
-  const savedBooking = localStorage.getItem("tripBooking");
-  if (savedBooking) {
-    const booking = JSON.parse(savedBooking);
-    confirmationCard.innerHTML = `
-      <h3>Previous Booking Found</h3>
-      <p><strong>Destination:</strong> ${booking.destination}</p>
-      <p><strong>From:</strong> ${booking.fromDate}</p>
-      <p><strong>To:</strong> ${booking.toDate}</p>
-      ${booking.activities.length ? `<p><strong>Activities:</strong> ${booking.activities.join(", ")}</p>` : ""}
-      ${booking.agent ? `
-        <p><strong>Agent:</strong> ${booking.agent.name}</p>
-        <p><strong>Contact:</strong> ${booking.agent.contact}</p>
-        <p><strong>Fee:</strong> ${booking.agent.fee}</p>
-      ` : ""}
-      <p class="success">ℹ️ This booking was loaded from local storage.</p>
-    `;
+// ===== Load Previous Booking on Page Load =====
+window.addEventListener("DOMContentLoaded", function() {
+  var saved = localStorage.getItem("tripBooking");
+
+  if (saved) {
+    var b = JSON.parse(saved);
+
+    confirmationCard.innerHTML =
+      "<h3>🔖 Previous Booking Found</h3>" +
+      "<p>Destination: <span>" + b.destination + "</span></p>" +
+      "<p>Email: <span>" + b.email + "</span></p>" +
+      "<p>From: <span>" + b.fromDate + "</span></p>" +
+      "<p>To: <span>" + b.toDate + "</span></p>" +
+      (b.activities.length > 0 ? "<p>Activities: <span>" + b.activities.join(", ") + "</span></p>" : "") +
+      (b.agent ? "<p>Agent: <span>" + b.agent.name + " — " + b.agent.contact + "</span></p>" : "") +
+      "<div class='alert-msg'>ℹ️ This booking was loaded from your last session.</div>";
+
     confirmationCard.classList.remove("hidden");
     cancelBtn.classList.remove("hidden");
   }

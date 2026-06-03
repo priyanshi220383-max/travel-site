@@ -34,7 +34,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#Packages">Packages made</a></li>
-            <li><a class="dropdown-item" href="#Ratings">Ratings</a></li>
+            <li><a class="dropdown-item" href="#ratings">Ratings</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#Testimonials">Traveler Testimonials</a></li>
           </ul>
@@ -138,60 +138,82 @@
     </div>
 </section>
 <!-- itinerary -->
-<section id="itinerary" class="itinerary-section">
-  <h2>Plan Your Trip</h2>
-  <form id="tripForm" class="trip-form">
-    <div class="form-group">
-      <label for="destination">Destination</label>
-      <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Your Trip</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <div class="form-group">
-      <label for="fromDate">From Date</label>
-      <input type="date" id="fromDate" name="fromDate" required>
-    </div>
+  <section id="itinerary">
+    <h2>Plan Your Trip</h2>
 
-    <div class="form-group">
-      <label for="toDate">To Date</label>
-      <input type="date" id="toDate" name="toDate" required>
-    </div>
+    <form id="tripForm">
 
-    <div class="form-group">
-      <label>Planning Type</label>
-      <div class="radio-group">
-        <label><input type="radio" name="planningType" value="self" required> Plan Yourself</label>
-        <label><input type="radio" name="planningType" value="agent"> Plan Through Agent</label>
+      <label>Destination:</label>
+      <input type="text" id="destination" placeholder="Enter destination">
+      <br><br>
+
+      <label>Email:</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <br><br>
+
+      <label>From Date:</label>
+      <input type="date" id="fromDate">
+      <br><br>
+
+      <label>To Date:</label>
+      <input type="date" id="toDate">
+      <br><br>
+
+      <label>Planning Type:</label><br>
+      <input type="radio" name="planType" value="self" id="rbSelf">
+      <label for="rbSelf">Plan Yourself</label>
+      &nbsp;&nbsp;
+      <input type="radio" name="planType" value="agent" id="rbAgent">
+      <label for="rbAgent">Plan Through Agent</label>
+      <br><br>
+
+      <!-- Activities Section -->
+      <div id="activitiesSection" class="hidden">
+        <h3>Select Activities</h3>
+
+        <input type="checkbox" value="Trekking"> Trekking <br>
+        <input type="checkbox" value="Sightseeing"> Sightseeing <br>
+        <input type="checkbox" value="Shopping"> Shopping <br>
+        <input type="checkbox" value="Camping"> Camping <br>
+        <input type="checkbox" value="Local Food Tour"> Local Food Tour <br>
+        <input type="checkbox" value="Adventure Sports"> Adventure Sports <br>
+        <input type="checkbox" value="Photography"> Photography <br>
+        <input type="checkbox" value="Beach Activities"> Beach Activities <br>
+        <input type="checkbox" value="Wildlife Safari"> Wildlife Safari <br>
+        <input type="checkbox" value="Cycling"> Cycling <br>
+        <br>
       </div>
-    </div>
 
-    <!-- Activities Section -->
-    <div id="activitiesSection" class="hidden">
-      <h3>Select Activities</h3>
-      <div class="checkbox-group">
-        <label><input type="checkbox" value="Trekking"> Trekking</label>
-        <label><input type="checkbox" value="Sightseeing"> Sightseeing</label>
-        <label><input type="checkbox" value="Shopping"> Shopping</label>
-        <label><input type="checkbox" value="Camping"> Camping</label>
-        <label><input type="checkbox" value="Local Food Tour"> Local Food Tour</label>
-        <label><input type="checkbox" value="Adventure Sports"> Adventure Sports</label>
-        <label><input type="checkbox" value="Photography"> Photography</label>
+      <!-- Agent Cards Section -->
+      <div id="agentSection" class="hidden">
+        <h3>Select an Agent</h3>
+        <div id="agentCards"></div>
       </div>
-      <button type="button" id="bookAgentBtn" class="btn booking-btn">Book Agent</button>
-    </div>
 
-    <!-- Agent Section -->
-    <div id="agentSection" class="hidden">
-      <h3>Select an Agent</h3>
-      <div id="agentCards" class="agent-cards"></div>
-    </div>
+      <button type="submit" id="submitBtn">Confirm Booking</button>
 
-    <button type="submit" class="btn booking-btn">Submit</button>
-  </form>
+    </form>
 
-  <!-- Confirmation Card -->
-  <div id="confirmationCard" class="confirmation-card hidden"></div>
-  <button id="cancelBtn" class="btn cancel-btn hidden">Cancel Itinerary</button>
-</section>
+    <!-- Confirmation Card -->
+    <div id="confirmationCard" class="hidden"></div>
+
+    <!-- Cancel Button -->
+    <button id="cancelBtn" class="hidden cancel-btn">Cancel Itinerary</button>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
 <!-- -----------------------------------------------packages------------------------------------------------------ -->
 <section id="Packages" class="packages-section">
   <h2 class="section-title">Packages Made</h2>
@@ -276,7 +298,7 @@
 <!-- Ratings Section -->
 <section id="ratings" class="ratings-section">
 
-    <h2>Traveler Community</h2>
+    <h2>Ratings</h2>
 
     <div class="ratings-container">
 
