@@ -886,3 +886,6 @@ img {
         width: 150px;
     }
 }
+.destination-card{
+    cursor: pointer;
+}

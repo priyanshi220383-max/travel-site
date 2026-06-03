@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nainital | TripDen</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f5f6;
+}
+
+/* MAIN CARD */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    display:flex;
+    gap:30px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.destination-img{
+    width:45%;
+}
+
+.destination-img img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.destination-details{
+    width:55%;
+}
+
+.destination-type{
+    color:#666;
+    font-size:18px;
+}
+
+.destination-name{
+    font-size:40px;
+    color:#0b1354;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.rating{
+    font-size:22px;
+    color:#e67e22;
+    margin-top:10px;
+}
+
+.description{
+    margin-top:20px;
+    line-height:1.8;
+    color:#444;
+}
+
+/* CATEGORY BUTTONS */
+
+.categories{
+    margin-top:25px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.categories button{
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    background:#0b1354;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.categories button:hover{
+    transform:scale(1.05);
+}
+
+/* ACTION BUTTONS */
+
+.action-buttons{
+    margin-top:25px;
+}
+
+.action-buttons button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:10px;
+    font-size:14px;
+}
+
+.guide-btn{
+    background:#0b1354;
+    color:white;
+}
+
+.plan-btn{
+    background:#1e88e5;
+    color:white;
+}
+
+.save-btn{
+    background:#e91e63;
+    color:white;
+}
+
+/* TABLE */
+
+table{
+    margin-top:25px;
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#f2f2f2;
+}
+
+/* FEATURED GUIDES */
+
+.guides{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+.section-title{
+    text-align:center;
+    color:#0b1354;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.guide-grid{
+    display:flex;
+    gap:25px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding-bottom:15px;
+}
+
+.guide-grid::-webkit-scrollbar{
+    height:8px;
+}
+
+.guide-grid::-webkit-scrollbar-track{
+    background:#f1f1f1;
+    border-radius:10px;
+}
+
+.guide-grid::-webkit-scrollbar-thumb{
+    background:#0b1354;
+    border-radius:10px;
+}
+.guide-card{
+    min-width:320px;
+    max-width:320px;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
+    flex-shrink:0;
+}
+
+.guide-card:hover{
+    transform:translateY(-5px);
+}
+
+.guide-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.guide-content{
+    padding:18px;
+}
+
+.guide-content h3{
+    color:#0b1354;
+    margin-bottom:10px;
+}
+
+/* TOAST */
+
+#toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#0b1354;
+    color:white;
+    padding:12px 25px;
+    border-radius:6px;
+    opacity:0;
+    transition:0.3s;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.destination-img,
+.destination-details{
+    width:100%;
+}
+
+.destination-img img{
+    height:350px;
+}
+
+.destination-name{
+    font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="destination-img">
+
+        <img src="https://i0.wp.com/img.traveltriangle.com/blog/wp-content/uploads/2017/03/rsz_cover.jpg?w=990&ssl=1">
+
+    </div>
+
+    <div class="destination-details">
+
+        <div class="destination-type">
+            Hill Station
+        </div>
+
+        <div class="destination-name">
+            Rishikesh
+        </div>
+
+        <div class="rating">
+            ⭐ 4.8 / 5 Tourist Rating
+        </div>
+
+        <p class="description">
+            Rishikesh, known as the Yoga Capital of the World, is a spiritual and adventure hub nestled along the banks of the
+            sacred Ganga River. Famous for yoga retreats, river rafting, suspension bridges, temples, cafés and Himalayan views,
+            Rishikesh attracts travelers seeking both peace and adrenaline-filled experiences.
+        </p>
+
+        <div class="categories">
+            <button>🍽 Restaurants</button>
+            <button>☕ Cafes</button>
+            <button>🛍 Shopping</button>
+            <button>🏕 Activities</button>
+            <button>🏔 View Points</button>
+            <button>🌲 Nature Walks</button>
+        </div>
+
+        <div class="action-buttons">
+
+            <button class="guide-btn">
+                Explore Guide
+            </button>
+
+            <button class="plan-btn">
+                Plan Trip
+            </button>
+
+            <button class="save-btn">
+                Save Destination
+            </button>
+
+        </div>
+        <table>
+        
+            <tr>
+                <td>State</td>
+                <td>Uttarakhand</td>
+            </tr>
+        
+            <tr>
+                <td>Best Time</td>
+                <td>September - April</td>
+            </tr>
+        
+            <tr>
+                <td>Altitude</td>
+                <td>372 m</td>
+            </tr>
+        
+            <tr>
+                <td>Famous For</td>
+                <td>Yoga Capital of the World</td>
+            </tr>
+        
+            <tr>
+                <td>Trip Duration</td>
+                <td>2 - 4 Days</td>
+            </tr>
+        
+            <tr>
+                <td>Nearest Railway Station</td>
+                <td>Rishikesh Railway Station</td>
+            </tr>
+        
+            <tr>
+                <td>Nearest Airport</td>
+                <td>Jolly Grant Airport, Dehradun</td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<section class="guides" id="guides">
+
+<h2 class="section-title">
+Featured Guides
+</h2>
+
+<div class="guide-grid">
+
+<div class="guide-card">
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaH8lBf5SEmd01MKnU4Q4B0ojuAAB5121hD7mz7k7WKIZZSHa59OoI_eMeprahyNLuHXapPA5OnoiIPVvlSkrc0b7Ey7mCmGevSs0CSCo2v2FoSjvQ3EfxuP-g4qYaQO9DTFlxd1yah-f1T1pt484Y9Urif4-dEcV1KPRHtW6E4B87EcfOv-cenGIMvK4/s1024/Iconic%20Bridges%20Over%20the%20Ganges%20in%20Rishikesh%20-%20Ram%20Jhula,%20Laxman%20Jhula%20&%20Janki%20Setu-2.jpg">
+
+<div class="guide-content">
+<h3>Places To Visit</h3>
+<p>
+Explore Lakshman Jhula, Ram Jhula, Triveni Ghat, Beatles Ashram, Neer Garh Waterfall and Parmarth Niketan.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://images.staybook.in/things-to-do/rishikesh-white-water-rafting-trip-for-all-levels/0.jpg">
+
+<div class="guide-content">
+<h3>Activities To Do</h3>
+<p>
+Experience river rafting, bungee jumping, cliff jumping, camping, trekking and yoga retreats.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/e4/ca/42/restaurant.jpg">
+
+<div class="guide-content">
+<h3>Food Guide</h3>
+<p>
+Enjoy riverside cafés, organic food, rooftop restaurants, local street food and international cuisine.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://s3.india.com/wp-content/uploads/2024/11/Handicrafts-A-Cultural-Tapestry.jpg?impolicy=Medium_Widthonly&w=350&h=263">
+
+<div class="guide-content">
+<h3>Shopping Guide</h3>
+<p>
+Shop for spiritual souvenirs, gemstones, handicrafts, clothing, singing bowls and yoga accessories.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://s7ap1.scene7.com/is/image/incredibleindia/laxman%20jhula-rishikesh-uttrakhand-hero?qlt=82&ts=1726646312953">
+
+<div class="guide-content">
+<h3>Scenic View Points</h3>
+
+<p>
+Witness stunning sunrise views from Kunjapuri Temple, Himalayan viewpoints, river valleys and forest trails.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<div id="toast"></div>
+
+<script>
+
+const toast = document.getElementById("toast");
+
+function showToast(message){
+    toast.innerText = message;
+    toast.style.opacity = "1";
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+    }, 2500);
+}
+
+document.querySelector(".guide-btn").addEventListener("click", () => {
+    document.getElementById("guides").scrollIntoView({
+        behavior:"smooth"
+    });
+});
+
+document.querySelector(".plan-btn").addEventListener("click", () => {
+    showToast("Trip Planner Coming Soon ✈️");
+});
+
+document.querySelector(".save-btn").addEventListener("click", () => {
+
+    let saved =
+    JSON.parse(localStorage.getItem("savedDestinations")) || [];
+
+    if(!saved.includes("Nainital")){
+
+        saved.push("Nainital");
+
+        localStorage.setItem(
+            "savedDestinations",
+            JSON.stringify(saved)
+        );
+
+        showToast("Nainital Saved ❤️");
+    }
+    else{
+        showToast("Already Saved ❤️");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
