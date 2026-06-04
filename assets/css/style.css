@@ -37,7 +37,7 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
     background-color: var(--off-white);
     color: var(--text-dark);
     overflow-x: hidden;
@@ -56,7 +56,7 @@ img {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: white!important;
+    background: white !important;
     padding: 12px 50px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
@@ -67,7 +67,7 @@ img {
     gap: 10px;
     font-size: 26px;
     font-weight: 700;
-    color: black!important;
+    color: black !important;
     letter-spacing: 1px;
 }
 
@@ -107,7 +107,7 @@ img {
 }
 
 .navbar-toggler-icon {
-    filter: invert(1);
+    filter: invert(0);
 }
 
 .dropdown-menu {
@@ -139,9 +139,9 @@ img {
     overflow: hidden;
 }
 
-.hero img {
+.hero-img img {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     object-fit: cover;
 }
 
@@ -185,11 +185,14 @@ img {
     font-size: 15px;
     font-weight: 600;
     color: var(--white);
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .hero-content .btn:hover {
     background: var(--navy-light);
+    transform: translateY(-2px);
 }
 
 /* ==========================
@@ -225,6 +228,7 @@ img {
     overflow: hidden;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .destination-card:hover {
@@ -252,11 +256,36 @@ img {
     background: var(--white);
     color: var(--text-muted);
     text-align: center;
-    padding: 12px;
-    font-size: 14px;
+    padding: 8px 12px 4px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* CTA Button inside Destination Card */
+.cta-btn {
+    display: block;
+    width: calc(100% - 24px);
+    margin: 10px 12px 14px;
+    padding: 9px;
+    border: none;
+    border-radius: 8px;
+    background: var(--sky-blue);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+}
+
+.cta-btn:hover {
+    background: var(--navy-light);
+}
+
+.destination-card a {
+    text-decoration: none;
 }
 
 /* ==========================
@@ -288,7 +317,7 @@ img {
     max-width: 680px;
     margin: 0 auto;
     background: var(--navy);
-    padding: 35px 35px;
+    padding: 35px;
     border-radius: 16px;
     border: 1px solid var(--navy-light);
 }
@@ -324,7 +353,6 @@ img {
     border-color: var(--accent-blue);
 }
 
-/* Fix date picker text visibility */
 #tripForm input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
@@ -343,7 +371,6 @@ img {
     height: 14px;
 }
 
-/* Radio label text */
 #tripForm label[for="rbSelf"],
 #tripForm label[for="rbAgent"] {
     display: inline;
@@ -362,10 +389,11 @@ img {
     border-radius: 10px;
     margin-bottom: 18px;
     border: 1px solid var(--navy-light);
+    color : white;
 }
 
 #activitiesSection h3 {
-    color: var(--accent-blue);
+    color: rgb(130, 174, 239);
     font-size: 16px;
     margin-bottom: 14px;
 }
@@ -373,11 +401,18 @@ img {
 #activitiesSection label {
     display: inline;
     font-size: 14px;
-    color: var(--light-gray);
+    color: var(--white);
     text-transform: none;
     letter-spacing: 0;
     font-weight: 400;
     margin-right: 4px;
+}
+
+/* Activity checkboxes - grid layout */
+#activitiesSection .activity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
 }
 
 /* Agent Section */
@@ -454,12 +489,12 @@ img {
 }
 
 .badge-available {
-    background: var(--green-light);
+    background: var(--green);
     color: var(--green);
 }
 
 .badge-busy {
-    background: var(--light-gray);
+    background: var(--gray);
     color: var(--text-muted);
 }
 
@@ -476,11 +511,12 @@ img {
     cursor: pointer;
     margin-top: 8px;
     letter-spacing: 0.5px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #submitBtn:hover {
     background: var(--navy-light);
+    transform: translateY(-1px);
 }
 
 /* Confirmation Card */
@@ -588,12 +624,13 @@ img {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex-shrink: 0;
 }
 
 .package-card:hover {
     transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
 }
 
 .package-card img {
@@ -812,11 +849,217 @@ img {
 }
 
 /* ==========================
+   MODAL
+========================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    animation: popup 0.35s ease;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Modal close button */
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+    z-index: 10;
+    transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: var(--light-gray);
+}
+
+/* Modal text content */
+#modalTitle {
+    font-size: 1.8rem;
+    color: var(--navy);
+    padding: 22px 28px 6px;
+    margin: 0;
+}
+
+.price-tag {
+    display: inline-block;
+    margin: 6px 28px 10px;
+    background: var(--off-white);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    border: 1px solid var(--light-gray);
+}
+
+#modalDescription {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 0 28px 10px;
+    margin: 0;
+}
+
+/* Modal features grid */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    padding: 10px 28px 0;
+}
+
+.feature-box {
+    background: var(--off-white);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--light-gray);
+}
+
+.feature-box h4 {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.feature-box p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Modal includes */
+.includes {
+    padding: 20px 28px 28px;
+}
+
+.includes h3 {
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.includes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.includes ul li {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--light-gray);
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.includes ul li::before {
+    content: "✓";
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.includes ul li:last-child {
+    border-bottom: none;
+}
+
+/* Modal action buttons */
+.action-area {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 28px 28px;
+}
+
+.book-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 12px 26px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.book-btn:hover {
+    background: var(--navy-light);
+    transform: translateY(-2px);
+}
+
+.plan-btn {
+    background: var(--off-white);
+    color: var(--navy);
+    border: 1px solid var(--light-gray);
+    padding: 12px 26px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.3s ease;
+}
+
+.plan-btn:hover {
+    background: var(--light-gray);
+}
+
+/* ==========================
    Responsive
 ========================== */
 
 @media (max-width: 992px) {
-
     .navbar {
         padding: 12px 20px;
     }
@@ -840,8 +1083,11 @@ img {
 }
 
 @media (max-width: 768px) {
-
     .hero {
+        height: 75vh;
+    }
+
+    .hero-img img {
         height: 75vh;
     }
 
@@ -874,10 +1120,31 @@ img {
         flex-direction: column;
         align-items: center;
     }
+
+    .modal-img {
+        height: 220px;
+    }
+
+    #modalTitle {
+        font-size: 1.4rem;
+        padding: 16px 18px 4px;
+    }
+
+    .price-tag,
+    #modalDescription,
+    .features,
+    .includes,
+    .action-area {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .price-tag {
+        margin-left: 18px;
+    }
 }
 
 @media (max-width: 480px) {
-
     #agentCards {
         grid-template-columns: 1fr 1fr;
     }
@@ -885,7 +1152,8 @@ img {
     .rating-box {
         width: 150px;
     }
-}
-.destination-card{
-    cursor: pointer;
+
+    .features {
+        grid-template-columns: 1fr;
+    }
 }

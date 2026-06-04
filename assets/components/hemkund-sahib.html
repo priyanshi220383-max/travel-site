@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nainital | TripDen</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f5f6;
+}
+
+/* MAIN CARD */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    display:flex;
+    gap:30px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.destination-img{
+    width:45%;
+}
+
+.destination-img img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.destination-details{
+    width:55%;
+}
+
+.destination-type{
+    color:#666;
+    font-size:18px;
+}
+
+.destination-name{
+    font-size:40px;
+    color:#0b1354;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.rating{
+    font-size:22px;
+    color:#e67e22;
+    margin-top:10px;
+}
+
+.description{
+    margin-top:20px;
+    line-height:1.8;
+    color:#444;
+}
+
+/* CATEGORY BUTTONS */
+
+.categories{
+    margin-top:25px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.categories button{
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    background:#0b1354;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.categories button:hover{
+    transform:scale(1.05);
+}
+
+/* ACTION BUTTONS */
+
+.action-buttons{
+    margin-top:25px;
+}
+
+.action-buttons button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:10px;
+    font-size:14px;
+}
+
+.guide-btn{
+    background:#0b1354;
+    color:white;
+}
+
+.plan-btn{
+    background:#1e88e5;
+    color:white;
+}
+
+.save-btn{
+    background:#e91e63;
+    color:white;
+}
+
+/* TABLE */
+
+table{
+    margin-top:25px;
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#f2f2f2;
+}
+
+/* FEATURED GUIDES */
+
+.guides{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+.section-title{
+    text-align:center;
+    color:#0b1354;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.guide-grid{
+    display:flex;
+    gap:25px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding-bottom:15px;
+}
+
+.guide-grid::-webkit-scrollbar{
+    height:8px;
+}
+
+.guide-grid::-webkit-scrollbar-track{
+    background:#f1f1f1;
+    border-radius:10px;
+}
+
+.guide-grid::-webkit-scrollbar-thumb{
+    background:#0b1354;
+    border-radius:10px;
+}
+.guide-card{
+    min-width:320px;
+    max-width:320px;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
+    flex-shrink:0;
+}
+
+.guide-card:hover{
+    transform:translateY(-5px);
+}
+
+.guide-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.guide-content{
+    padding:18px;
+}
+
+.guide-content h3{
+    color:#0b1354;
+    margin-bottom:10px;
+}
+
+/* TOAST */
+
+#toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#0b1354;
+    color:white;
+    padding:12px 25px;
+    border-radius:6px;
+    opacity:0;
+    transition:0.3s;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.destination-img,
+.destination-details{
+    width:100%;
+}
+
+.destination-img img{
+    height:350px;
+}
+
+.destination-name{
+    font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="destination-img">
+
+        <img src="https://indiaholidaymall.com/images/blog/Hemkunt-Sahib-Gurdwara.jpg">
+
+    </div>
+
+    <div class="destination-details">
+
+        <div class="destination-type">
+            Pilgrimage & Trekking
+        </div>
+
+        <div class="destination-name">
+            Hemkunt Sahib
+        </div>
+<div class="rating">
+    ⭐ 4.8 / 5 Nature & Trekking Rating
+</div>
+
+        <p class="description">
+            Hemkund Sahib is one of the highest and most revered Sikh pilgrimage sites in the world, located at an altitude of
+            over 4,300 meters in the Garhwal Himalayas of Uttarakhand. Surrounded by seven snow-capped peaks and a pristine
+            glacial lake, the gurudwara attracts thousands of devotees and trekkers every year. The journey to Hemkund Sahib
+            offers a unique combination of spirituality, adventure and breathtaking natural beauty.
+        </p>
+
+        <div class="categories">
+            <button>🛕 Pilgrimage</button>
+            <button>🥾 Trekking</button>
+            <button>📸 Photography</button>
+            <button>🏔 View Points</button>
+            <button>🌸 Valley of Flowers</button>
+            <button>🌲 Nature Walks</button>
+        </div>
+        <div class="action-buttons">
+
+            <button class="guide-btn">
+                Explore Guide
+            </button>
+
+            <button class="plan-btn">
+                Plan Trip
+            </button>
+
+            <button class="save-btn">
+                Save Destination
+            </button>
+
+        </div>
+        <table>
+        
+           <tr>
+<td>State</td>
+<td>Uttarakhand</td>
+</tr>
+
+<tr>
+<td>Best Time</td>
+<td>June - September</td>
+</tr>
+
+<tr>
+<td>Altitude</td>
+<td>4329 m</td>
+</tr>
+
+<tr>
+<td>Famous For</td>
+<td>Hemkund Sahib Gurudwara</td>
+</tr>
+
+<tr>
+<td>Trip Duration</td>
+<td>2 - 3 Days</td>
+</tr>
+
+<tr>
+<td>Nearest Railway Station</td>
+<td>Rishikesh</td>
+</tr>
+
+<tr>
+<td>Nearest Airport</td>
+<td>Jolly Grant Airport, Dehradun</td>
+</tr>
+        </table>
+
+    </div>
+
+</div>
+
+<section class="guides" id="guides">
+
+<h2 class="section-title">
+Featured Guides
+</h2>
+
+<div class="guide-grid">
+
+<div class="guide-card">
+
+<img src="https://haridwarrishikeshtourism.in/images/tourist-places/gurdwara-rishikesh-shri-hemkunt-sahib-trust/gurdwara-rishikesh-shri-hemkunt-sahib-trust-tourism-entry-ticket-price.jpg">
+
+<div class="guide-content">
+<h3>Places To Visit</h3>
+<p>
+Visit Hemkund Sahib Gurudwara, Hemkund Lake, Valley of Flowers, Ghangaria and nearby Himalayan trails.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://himtrek.co.in/wp-content/uploads/2025/09/Valley-Of-Flowers-Trek-2.webp">
+
+<div class="guide-content">
+<h3>Activities To Do</h3>
+<p>
+Enjoy trekking, nature photography, spiritual journeys, mountain exploration and visiting alpine meadows.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://i.ytimg.com/vi/0xoRfOG3msM/sddefault.jpg">
+
+<div class="guide-content">
+<h3>Food Guide</h3>
+<p>
+Relish simple vegetarian meals, langar at the gurudwara and traditional mountain cuisine during the trek.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://img.magicpin.com/8509755_store_images_7.jpg">
+
+<div class="guide-content">
+<h3>Shopping Guide</h3>
+<p>
+Shop for religious souvenirs, prayer items, woollen clothing and trekking essentials in nearby towns.
+</p>
+</div>
+
+</div>
+
+<div class="guide-card">
+
+<img src="https://www.bizarexpedition.com/api/uploads/gallary/file-1771401504428.webp">
+
+<div class="guide-content">
+<h3>Scenic View Points</h3>
+
+<p>
+Witness spectacular views of glacial lakes, snow-covered peaks, alpine valleys and Himalayan landscapes.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<div id="toast"></div>
+
+<script>
+
+const toast = document.getElementById("toast");
+
+function showToast(message){
+    toast.innerText = message;
+    toast.style.opacity = "1";
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+    }, 2500);
+}
+
+document.querySelector(".guide-btn").addEventListener("click", () => {
+    document.getElementById("guides").scrollIntoView({
+        behavior:"smooth"
+    });
+});
+
+document.querySelector(".plan-btn").addEventListener("click", () => {
+    showToast("Trip Planner Coming Soon ✈️");
+});
+
+document.querySelector(".save-btn").addEventListener("click", () => {
+
+    let saved =
+    JSON.parse(localStorage.getItem("savedDestinations")) || [];
+
+    if(!saved.includes("Hemkund Sahib")){
+
+        saved.push("Hemkund Sahib");
+
+        localStorage.setItem(
+            JSON.stringify(saved)
+        );
+
+        showToast("Hemkund sahib Saved ❤️");
+    }
+    else{
+        showToast("Already Saved ❤️");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
