@@ -595,33 +595,32 @@ margin-top:20px;
 
     <h4>Hotel Booking</h4>
 
-    <input
-    type="number"
-    id="rooms"
-    class="form-control mb-2"
-    placeholder="Number of Rooms">
+    <h4>Hotel Booking</h4>
 
-    <input
-    type="number"
-    id="members"
-    class="form-control mb-2"
-    placeholder="Members">
+<input
+type="number"
+id="members"
+class="form-control mb-2"
+placeholder="Members">
 
-    <input
-    type="number"
-    id="hotelPrice"
-    class="form-control mb-2"
-    placeholder="Cost Per Day">
+<input
+type="number"
+id="rooms"
+class="form-control mb-2"
+placeholder="Number of Rooms">
 
-    <button
-    class="btn btn-success mb-3"
-    onclick="calculateCost()">
-        Calculate Hotel Cost
-    </button>
+<div id="selectedHotelBox"></div>
 
-    <div id="hotelCost"></div>
-
+<div id="hotelCost"></div>
     <hr>
+<div class="card p-2 mb-2" id="selectedHotelBox">
+<input
+type="text"
+id="selectedHotel"
+class="form-control mb-2"
+placeholder="Selected Hotel"
+readonly>
+</div>
 
     <!-- Hotel Search -->
 
@@ -692,6 +691,11 @@ Book Agent Plan
 <script>
 
 const toast = document.getElementById("toast");
+let selectedHotel = "";
+let selectedHotelCost = 0;
+
+let selectedAgent = "";
+let selectedAgentCost = 0;
 
 function showToast(message){
     toast.innerText = message;
@@ -748,7 +752,9 @@ const data = await response.json();
 
 let html = "";
 
-data.features.forEach(place=>{
+data.features.forEach((place,index)=>{
+
+const hotelPrice = 2000 + (index * 500);
 
 html += `
 <div class="card mb-3">
@@ -762,11 +768,25 @@ ${place.properties.name || "Hotel"}
 ${place.properties.formatted || ""}
 </p>
 
+<p>
+<strong>₹${hotelPrice} per night</strong>
+</p>
+
+<button
+class="btn btn-success"
+onclick="selectHotel(
+'${place.properties.name || "Hotel"}',
+${hotelPrice}
+)">
+Select Hotel
+</button>
+
 </div>
 </div>
 `;
 
 });
+
 
 hotelResults.innerHTML = html;
 
@@ -781,6 +801,31 @@ console.log(error);
 }
 
 }
+function selectHotel(name,cost){
+
+    selectedHotel = name;
+    selectedHotelCost = cost;
+
+    document.getElementById("selectedHotel").value =
+    `${name} - ₹${cost}/night`;
+
+const rooms =
+Number(document.getElementById("rooms").value);
+
+const days =
+Number(localStorage.getItem("tripDays"));
+
+const totalCost =
+cost * rooms * days;
+
+document.getElementById("hotelCost").innerHTML =
+`<h5>Total Hotel Cost : ₹${totalCost}</h5>`;
+
+    showToast(name + " Selected");
+
+}
+
+
 // trip duration calculation
 function calculateTrip(){
 
@@ -799,23 +844,30 @@ document.getElementById("tripDuration").innerHTML =
 localStorage.setItem("tripDays",days);
 
 }
-// calc hotel cost
-function calculateCost(){
+// ======calc hotel cost=========
+function calculateHotelCost(){
 
 const rooms =
 Number(document.getElementById("rooms").value);
-
-const price =
-Number(document.getElementById("hotelPrice").value);
 
 const days =
 Number(localStorage.getItem("tripDays"));
 
 const total =
-rooms * price * days;
+rooms * selectedHotelCost * days;
 
-document.getElementById("hotelCost").innerHTML =
-`<h5>Total Hotel Cost: ₹${total}</h5>`;
+document.getElementById("hotelCost").innerHTML = `
+
+<h5>
+Total Room Cost : ₹${total}
+</h5>
+
+`;
+
+localStorage.setItem(
+"hotelTotal",
+total
+);
 
 }
 // day wise plan
@@ -868,29 +920,121 @@ document.getElementById("tripPlanContainer").innerHTML =
 html;
 
 }
+const agents = {
+
+Rahul:{
+rating:"4.8",
+cost:2500
+},
+
+Priya:{
+rating:"4.7",
+cost:2200
+},
+
+Amit:{
+rating:"4.9",
+cost:3000
+},
+
+Sneha:{
+rating:"4.6",
+cost:2000
+}
+
+};
+function showAgentDetails(){
+
+const agent =
+document.getElementById("agentSelect").value;
+
+if(agent==="") return;
+
+selectedAgent = agent;
+selectedAgentCost = agents[agent].cost;
+
+document.getElementById("agentInfo").innerHTML = `
+
+<div class="card p-3">
+
+<h5>${agent}</h5>
+
+<p>⭐ Rating : ${agents[agent].rating}</p>
+
+<p>💰 Cost : ₹${agents[agent].cost}</p>
+
+</div>
+
+`;
+
+}
+function bookAgentPlan(){
+
+const days =
+Number(localStorage.getItem("tripDays"));
+
+const rooms =
+Number(document.getElementById("rooms").value);
+
+const hotelTotal =
+selectedHotelCost * rooms * days;
+
+const grandTotal =
+hotelTotal + selectedAgentCost;
+
+document.getElementById("planSummary").innerHTML = `
+
+<div class="alert alert-info mt-3">
+
+<h5>Booking Summary</h5>
+
+<p>Hotel : ${selectedHotel}</p>
+
+<p>Hotel Cost : ₹${hotelTotal}</p>
+
+<p>Agent : ${selectedAgent}</p>
+
+<p>Agent Cost : ₹${selectedAgentCost}</p>
+
+<hr>
+
+<h4>Total Cost : ₹${grandTotal}</h4>
+
+</div>
+
+`;
+
+}
 // submit trip
 
 function submitTrip(){
 
-const guide =
-document.getElementById("guideSelect").value;
+const days =
+Number(localStorage.getItem("tripDays"));
 
-document.getElementById("finalOutput").innerHTML =
+const rooms =
+Number(document.getElementById("rooms").value);
 
-`
+const hotelTotal =
+selectedHotelCost * rooms * days;
+
+const grandTotal =
+hotelTotal + selectedAgentCost;
+
+document.getElementById("finalOutput").innerHTML = `
 
 <div class="alert alert-success">
 
-<h5>Trip Planned Successfully</h5>
+<h4>✅ Booking Done Successfully</h4>
+
+<p>Hotel : ${selectedHotel}</p>
+
+<p>Agent : ${selectedAgent}</p>
+
+<p>Total Amount : ₹${grandTotal}</p>
 
 <p>
-Guide Selected :
-${guide}
-</p>
-
-<p>
-Guide will contact you within
-24 hours.
+Agent will contact you within 24 hours.
 </p>
 
 </div>
