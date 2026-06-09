@@ -1,476 +1,1098 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nainital | TripDen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Kedarnath | TripDen</title>
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f6;
+        }
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f5f5f6;
-}
+        /* MAIN CARD */
 
-/* MAIN CARD */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            gap: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:40px auto;
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    display:flex;
-    gap:30px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
+        .destination-img {
+            width: 45%;
+        }
 
-.destination-img{
-    width:45%;
-}
+        .destination-img img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
 
-.destination-img img{
-    width:100%;
-    height:500px;
-    object-fit:cover;
-    border-radius:12px;
-}
+        .destination-details {
+            width: 55%;
+        }
 
-.destination-details{
-    width:55%;
-}
+        .destination-type {
+            color: #666;
+            font-size: 18px;
+        }
 
-.destination-type{
-    color:#666;
-    font-size:18px;
-}
+        .destination-name {
+            font-size: 40px;
+            color: #0b1354;
+            font-weight: bold;
+            margin-top: 8px;
+        }
 
-.destination-name{
-    font-size:40px;
-    color:#0b1354;
-    font-weight:bold;
-    margin-top:8px;
-}
+        .rating {
+            font-size: 22px;
+            color: #e67e22;
+            margin-top: 10px;
+        }
 
-.rating{
-    font-size:22px;
-    color:#e67e22;
-    margin-top:10px;
-}
+        .description {
+            margin-top: 20px;
+            line-height: 1.8;
+            color: #444;
+        }
 
-.description{
-    margin-top:20px;
-    line-height:1.8;
-    color:#444;
-}
+        /* CATEGORY BUTTONS */
 
-/* CATEGORY BUTTONS */
+        .categories {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
-.categories{
-    margin-top:25px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
+        .categories button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #0b1354;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.categories button{
-    padding:12px 18px;
-    border:none;
-    border-radius:8px;
-    background:#0b1354;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-}
+        .categories button:hover {
+            transform: scale(1.05);
+        }
 
-.categories button:hover{
-    transform:scale(1.05);
-}
+        /* ACTION BUTTONS */
 
-/* ACTION BUTTONS */
+        .action-buttons {
+            margin-top: 25px;
+        }
 
-.action-buttons{
-    margin-top:25px;
-}
+        .action-buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 14px;
+        }
 
-.action-buttons button{
-    padding:12px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin-right:10px;
-    font-size:14px;
-}
+        .guide-btn {
+            background: #0b1354;
+            color: white;
+        }
 
-.guide-btn{
-    background:#0b1354;
-    color:white;
-}
+        .plan-btn {
+            background: #1e88e5;
+            color: white;
+        }
 
-.plan-btn{
-    background:#1e88e5;
-    color:white;
-}
+        .save-btn {
+            background: #e91e63;
+            color: white;
+        }
 
-.save-btn{
-    background:#e91e63;
-    color:white;
-}
+        /* TABLE */
 
-/* TABLE */
+        table {
+            margin-top: 25px;
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-table{
-    margin-top:25px;
-    width:100%;
-    border-collapse:collapse;
-}
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-th,td{
-    border:1px solid #ddd;
-    padding:10px;
-    text-align:left;
-}
+        th {
+            background: #f2f2f2;
+        }
 
-th{
-    background:#f2f2f2;
-}
+        /* FEATURED GUIDES */
 
-/* FEATURED GUIDES */
+        .guides {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
 
-.guides{
-    width:90%;
-    max-width:1200px;
-    margin:50px auto;
-}
+        .section-title {
+            text-align: center;
+            color: #0b1354;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
 
-.section-title{
-    text-align:center;
-    color:#0b1354;
-    margin-bottom:30px;
-    font-size:32px;
-}
+        .guide-grid {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 15px;
+        }
 
-.guide-grid{
-    display:flex;
-    gap:25px;
-    overflow-x:auto;
-    scroll-behavior:smooth;
-    padding-bottom:15px;
-}
+        .guide-grid::-webkit-scrollbar {
+            height: 8px;
+        }
 
-.guide-grid::-webkit-scrollbar{
-    height:8px;
-}
+        .guide-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
 
-.guide-grid::-webkit-scrollbar-track{
-    background:#f1f1f1;
-    border-radius:10px;
-}
+        .guide-grid::-webkit-scrollbar-thumb {
+            background: #0b1354;
+            border-radius: 10px;
+        }
 
-.guide-grid::-webkit-scrollbar-thumb{
-    background:#0b1354;
-    border-radius:10px;
-}
-.guide-card{
-    min-width:320px;
-    max-width:320px;
-    background:white;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    transition:0.3s;
-    flex-shrink:0;
-}
+        .guide-card {
+            min-width: 320px;
+            max-width: 320px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
 
-.guide-card:hover{
-    transform:translateY(-5px);
-}
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
 
-.guide-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
+        .guide-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
 
-.guide-content{
-    padding:18px;
-}
+        .guide-content {
+            padding: 18px;
+        }
 
-.guide-content h3{
-    color:#0b1354;
-    margin-bottom:10px;
-}
+        .guide-content h3 {
+            color: #0b1354;
+            margin-bottom: 10px;
+        }
 
-/* TOAST */
+        /* TOAST */
 
-#toast{
-    position:fixed;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#0b1354;
-    color:white;
-    padding:12px 25px;
-    border-radius:6px;
-    opacity:0;
-    transition:0.3s;
-}
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0b1354;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: 0.3s;
+        }
 
-/* MOBILE */
+        /* MOBILE */
 
-@media(max-width:900px){
+        @media(max-width:900px) {
 
-.container{
-    flex-direction:column;
-}
+            .container {
+                flex-direction: column;
+            }
 
-.destination-img,
-.destination-details{
-    width:100%;
-}
+            .destination-img,
+            .destination-details {
+                width: 100%;
+            }
 
-.destination-img img{
-    height:350px;
-}
+            .destination-img img {
+                height: 350px;
+            }
 
-.destination-name{
-    font-size:30px;
-}
+            .destination-name {
+                font-size: 30px;
+            }
 
-}
+        }
 
-</style>
+        /* ==========================
+   NAVBAR
+========================== */
+
+        .custom-navbar {
+            background: #ffffff;
+            padding: 12px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b1354 !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-brand img {
+            border-radius: 50%;
+        }
+
+        .nav-link {
+            color: #0b1354 !important;
+            font-weight: 600;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #1e88e5 !important;
+        }
+
+        /* ==========================
+   FOOTER
+========================== */
+
+        .footer {
+            background: #02053d;
+            color: white;
+            margin-top: 80px;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-box h3,
+        .footer-box h4 {
+            color: #3f8cff;
+            margin-bottom: 20px;
+        }
+
+        .footer-box p {
+            color: #b9bfd8;
+            line-height: 1.8;
+        }
+
+        .footer-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-box ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-box ul li a {
+            text-decoration: none;
+            color: #b9bfd8;
+            transition: 0.3s;
+        }
+
+        .footer-box ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            color: #b9bfd8;
+        }
+
+        .offcanvas-body h4 {
+            margin-top: 20px;
+            color: #0b1354;
+        }
+
+        #tripDuration,
+        #hotelCost {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        #finalOutput {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-
-<div class="container">
-
-    <div class="destination-img">
-
-        <img src="https://static.toiimg.com/photo/msid-87566208,width-96,height-65.cms">
-
-    </div>
-
-    <div class="destination-details">
-
-        <div class="destination-type">
-            Pilgrimage Site
-        </div>
-
-        <div class="destination-name">
-            Gangotri Dham
-        </div>
-
-        <div class="rating">
-            ⭐ 4.8 / 5 Tourist Rating
-        </div>
-
-        <p class="description">
-            Gangotri Dham is one of the four sacred sites in the Char Dham pilgrimage circuit. It is located in the Uttarakhand
-            state and is known for its spiritual significance and breathtaking natural beauty. The site is home to the Gangotri
-            Glacier, which is considered the source of the River Ganga.
-        </p>
-
-        <div class="categories">
-            <button>🛕 Pilgrimage</button>
-            <button>🥾 Trekking</button>
-            <button>📸 Photography</button>
-            <button>🏔 View Points</button>
-            <button>🌊 River Origin</button>
-            <button>🌲 Nature Walks</button>
-        </div>
-
-        <div class="action-buttons">
-
-            <button class="guide-btn">
-                Explore Guide
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../images/logo.jpg" alt="TripDen Logo" width="70" height="40">
+                TripDen
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinations">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#itinerary">Itinerary</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">MORE</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#Packages">Packages Made</a></li>
+                            <li><a class="dropdown-item" href="#ratings">Ratings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#Testimonials">Traveler Testimonials</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-            <button class="plan-btn">
-                Plan Trip
-            </button>
+    <section>
 
-            <button class="save-btn">
-                Save Destination
-            </button>
+        <div class="container">
+
+            <div class="destination-img">
+
+                <img src="https://static.toiimg.com/photo/msid-87566208,width-96,height-65.cms">
+
+            </div>
+
+            <div class="destination-details">
+
+                <div class="destination-type">
+                    Pilgrimage Site
+                </div>
+
+                <div class="destination-name">
+                    Gangotri Dham
+                </div>
+
+                <div class="rating">
+                    ⭐ 4.8 / 5 Tourist Rating
+                </div>
+
+                <p class="description">
+                    Gangotri Dham is one of the four sacred sites in the Char Dham pilgrimage circuit. It is located in
+                    the Uttarakhand
+                    state and is known for its spiritual significance and breathtaking natural beauty. The site is home
+                    to the Gangotri
+                    Glacier, which is considered the source of the River Ganga.
+                </p>
+
+                <div class="categories">
+                    <button>🛕 Pilgrimage</button>
+                    <button>🥾 Trekking</button>
+                    <button>📸 Photography</button>
+                    <button>🏔 View Points</button>
+                    <button>🌊 River Origin</button>
+                    <button>🌲 Nature Walks</button>
+                </div>
+
+                <div class="action-buttons">
+
+                    <button class="guide-btn">
+                        Explore Guide
+                    </button>
+                    <button class="plan-btn" data-bs-toggle="offcanvas" data-bs-target="#tripPlanner">
+                        Plan Trip
+                    </button>
+
+                    <button class="save-btn">
+                        Save Destination
+                    </button>
+
+                </div>
+                <table>
+
+                    <tr>
+                        <td>State</td>
+                        <td>Uttarakhand</td>
+                    </tr>
+
+                    <tr>
+                        <td>Best Time</td>
+                        <td>May - June & September - October</td>
+                    </tr>
+
+                    <tr>
+                        <td>Altitude</td>
+                        <td>3100 m</td>
+                    </tr>
+
+                    <tr>
+                        <td>Famous For</td>
+                        <td>Gangotri Temple & Origin of River Ganga</td>
+                    </tr>
+
+                    <tr>
+                        <td>Trip Duration</td>
+                        <td>2 - 3 Days</td>
+                    </tr>
+
+                    <tr>
+                        <td>Nearest Railway Station</td>
+                        <td>Rishikesh</td>
+                    </tr>
+
+                    <tr>
+                        <td>Nearest Airport</td>
+                        <td>Jolly Grant Airport, Dehradun</td>
+                    </tr>
+                </table>
+
+            </div>
 
         </div>
-        <table>
-        
-             <tr>
-<td>State</td>
-<td>Uttarakhand</td>
-</tr>
+        <section class="guides" id="guides">
 
-<tr>
-<td>Best Time</td>
-<td>May - June & September - October</td>
-</tr>
+            <h2 class="section-title">
+                Featured Guides
+            </h2>
 
-<tr>
-<td>Altitude</td>
-<td>3100 m</td>
-</tr>
+            <div class="guide-grid">
 
-<tr>
-<td>Famous For</td>
-<td>Gangotri Temple & Origin of River Ganga</td>
-</tr>
+                <div class="guide-card">
 
-<tr>
-<td>Trip Duration</td>
-<td>2 - 3 Days</td>
-</tr>
+                    <img
+                        src="https://www.chardham-pilgrimage-tour.com/assets/images/shri-gangotri-dham-temple-001.webp">
 
-<tr>
-<td>Nearest Railway Station</td>
-<td>Rishikesh</td>
-</tr>
+                    <div class="guide-content">
+                        <h3>Places To Visit</h3>
+                        <p>
+                            Visit Gangotri Temple, Bhagirath Shila, Surya Kund, Pandava Gufa and the sacred Gaumukh
+                            Glacier.
+                        </p>
+                    </div>
 
-<tr>
-<td>Nearest Airport</td>
-<td>Jolly Grant Airport, Dehradun</td>
-</tr>
-        </table>
+                </div>
 
-    </div>
+                <div class="guide-card">
 
-</div>
-<section class="guides" id="guides">
+                    <img
+                        src="https://www.sacredyatra.com/wp-content/uploads/2012/12/The-Chardham-Camp-Harsil-Gangotri.jpg">
 
-<h2 class="section-title">
-Featured Guides
-</h2>
+                    <div class="guide-content">
+                        <h3>Activities To Do</h3>
+                        <p>
+                            Enjoy trekking, spiritual journeys, meditation, river-side walks, camping and Himalayan
+                            photography.
+                        </p>
+                    </div>
 
-<div class="guide-grid">
+                </div>
 
-<div class="guide-card">
+                <div class="guide-card">
 
-<img src="https://www.chardham-pilgrimage-tour.com/assets/images/shri-gangotri-dham-temple-001.webp">
+                    <img
+                        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/bb/bb/b5/gangotri.jpg?w=900&h=500&s=1">
 
-<div class="guide-content">
-<h3>Places To Visit</h3>
+                    <div class="guide-content">
+                        <h3>Food Guide</h3>
+                        <p>
+                            Relish simple vegetarian meals, local Garhwali dishes, temple prasad and traditional
+                            mountain cuisine.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="guide-card">
+
+                    <img
+                        src="https://content.jdmagicbox.com/v2/comp/ujjain/j2/9999px734.x734.250418180203.h2j2/catalogue/o3vci0l9jzjr0wh-ol2kv4p319.jpg">
+
+                    <div class="guide-content">
+                        <h3>Shopping Guide</h3>
+                        <p>
+                            Shop for religious souvenirs, prayer items, Rudraksha malas, woollens and Himalayan
+                            handicrafts.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="guide-card">
+
+                    <img
+                        src="https://thecrazymountaineers.com/images/blogs/16/Gangotri_National_Park_-_A_Mesmerizing_Journey.jpg">
+
+                    <div class="guide-content">
+                        <h3>Scenic View Points</h3>
+
+                        <p>
+                            Witness stunning views of the Bhagirathi peaks, glaciers, alpine valleys, waterfalls and
+                            Himalayan landscapes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-box">
+                    <h3>TripDen</h3>
+                    <p>Plan your perfect Uttarakhand journey with ease. Explore destinations, build itineraries, and
+                        book trusted travel agents.</p>
+                </div>
+                <div class="footer-box">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#itinerary">Itinerary</a></li>
+                        <li><a href="#Packages">Packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box">
+                    <h4>Contact</h4>
+                    <p>Email: support@tripden.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                    <p>India</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 TripDen. All Rights Reserved.</p>
+            </div>
+        </footer>
+        <!-- offcanvas -->
+        <button class="plan-btn" data-bs-toggle="offcanvas" data-bs-target="#tripPlanner">
+            Plan Trip
+        </button>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="tripPlanner">
+
+            <div class="offcanvas-header">
+                <h5>Plan Your Trip</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas">
+                </button>
+            </div>
+
+            <div class="offcanvas-body">
+
+                <!-- Trip Dates -->
+                <h4>Trip Duration</h4>
+
+                <label>From Date</label>
+                <input type="date" id="fromDate" class="form-control mb-2">
+
+                <label>To Date</label>
+                <input type="date" id="toDate" class="form-control mb-2">
+
+                <button class="btn btn-primary mb-3" onclick="calculateTrip()">
+                    Calculate Duration
+                </button>
+
+                <div id="tripDuration"></div>
+
+                <hr>
+
+                <!-- Hotel Booking -->
+
+                <h4>Hotel Booking</h4>
+
+                <h4>Hotel Booking</h4>
+
+                <input type="number" id="members" class="form-control mb-2" placeholder="Members">
+
+                <input type="number" id="rooms" class="form-control mb-2" placeholder="Number of Rooms">
+
+                <div id="selectedHotelBox"></div>
+
+                <div id="hotelCost"></div>
+                <hr>
+                <div class="card p-2 mb-2" id="selectedHotelBox">
+                    <input type="text" id="selectedHotel" class="form-control mb-2" placeholder="Selected Hotel"
+                        readonly>
+                </div>
+
+                <!-- Hotel Search -->
+
+                <h4>Search Hotels</h4>
+
+                <button class="btn btn-dark mb-3" onclick="loadHotels()">
+                    Find Hotels
+                </button>
+
+                <div id="hotelResults"></div>
+
+                <hr>
+
+                <!-- Guide -->
+                <hr>
+                <h4>Plan Through Agent</h4>
+
+                <select id="agentSelect" class="form-select mb-3" onchange="showAgentDetails()">
+
+                    <option value="">Choose Agent</option>
+
+                    <option value="Rahul">
+                        Rahul Sharma
+                    </option>
+
+                    <option value="Priya">
+                        Priya Negi
+                    </option>
+
+                    <option value="Amit">
+                        Amit Rautela
+                    </option>
+
+                    <option value="Sneha">
+                        Sneha Adhikari
+                    </option>
+
+                </select>
+
+                <div id="agentInfo"></div>
+
+                <button class="btn btn-warning mt-3" onclick="bookAgentPlan()">
+                    Book Agent Plan
+                </button>
+
+                <div id="planSummary"></div>
+
+                <!-- Submit -->
+
+                <button class="btn btn-primary w-100" onclick="submitTrip()">
+                    Submit Trip
+                </button>
+
+                <div id="finalOutput" class="mt-3"></div>
+
+            </div>
+
+        </div>
+        <div id="toast"></div>
+
+        <script>
+
+            const toast = document.getElementById("toast");
+            let selectedHotel = "";
+            let selectedHotelCost = 0;
+
+            let selectedAgent = "";
+            let selectedAgentCost = 0;
+
+            function showToast(message) {
+                toast.innerText = message;
+                toast.style.opacity = "1";
+
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                }, 2500);
+            }
+
+            document.querySelector(".guide-btn").addEventListener("click", () => {
+                document.getElementById("guides").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+            document.querySelector(".save-btn").addEventListener("click", () => {
+
+                let saved =
+                    JSON.parse(localStorage.getItem("savedDestinations")) || [];
+
+                if (!saved.includes("Gangotri-Dham")) {
+
+                    saved.push("Gangotri-Dham");
+
+                    localStorage.setItem(
+                        "savedDestinations",
+                        JSON.stringify(saved)
+                    );
+
+                    showToast("Gangotri-Dham Saved ❤️");
+                }
+                else {
+                    showToast("Already Saved ❤️");
+                }
+
+            });
+            const API_KEY = "e2d892e1b7644f10a9de2da196c33c16";
+            async function loadHotels() {
+
+                const hotelResults =
+                    document.getElementById("hotelResults");
+
+                hotelResults.innerHTML =
+                    "<p>Loading Hotels...</p>";
+
+               const url =
+`https://api.geoapify.com/v2/places?categories=accommodation.hotel&filter=circle:79.0718,30.9947,15000&limit=20&apiKey=${API_KEY}`;
+
+                try {
+
+                    const response = await fetch(url);
+
+                    const data = await response.json();
+
+                    let html = "";
+
+                    data.features.forEach((place, index) => {
+
+                        const hotelPrice = 2000 + (index * 500);
+
+                        html += `
+<div class="card mb-3">
+<div class="card-body">
+
+<h5>
+${place.properties.name || "Hotel"}
+</h5>
+
 <p>
-Visit Gangotri Temple, Bhagirath Shila, Surya Kund, Pandava Gufa and the sacred Gaumukh Glacier.
+${place.properties.formatted || ""}
 </p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://www.sacredyatra.com/wp-content/uploads/2012/12/The-Chardham-Camp-Harsil-Gangotri.jpg">
-
-<div class="guide-content">
-<h3>Activities To Do</h3>
-<p>
-Enjoy trekking, spiritual journeys, meditation, river-side walks, camping and Himalayan photography.
-</p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/bb/bb/b5/gangotri.jpg?w=900&h=500&s=1">
-
-<div class="guide-content">
-<h3>Food Guide</h3>
-<p>
-Relish simple vegetarian meals, local Garhwali dishes, temple prasad and traditional mountain cuisine.
-</p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://content.jdmagicbox.com/v2/comp/ujjain/j2/9999px734.x734.250418180203.h2j2/catalogue/o3vci0l9jzjr0wh-ol2kv4p319.jpg">
-
-<div class="guide-content">
-<h3>Shopping Guide</h3>
-<p>
-Shop for religious souvenirs, prayer items, Rudraksha malas, woollens and Himalayan handicrafts.
-</p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://thecrazymountaineers.com/images/blogs/16/Gangotri_National_Park_-_A_Mesmerizing_Journey.jpg">
-
-<div class="guide-content">
-<h3>Scenic View Points</h3>
 
 <p>
-Witness stunning views of the Bhagirathi peaks, glaciers, alpine valleys, waterfalls and Himalayan landscapes.
+<strong>₹${hotelPrice} per night</strong>
+</p>
+
+<button
+class="btn btn-success"
+onclick="selectHotel(
+'${place.properties.name || "Hotel"}',
+${hotelPrice}
+)">
+Select Hotel
+</button>
+
+</div>
+</div>
+`;
+
+                    });
+
+
+                    hotelResults.innerHTML = html;
+
+                }
+                catch (error) {
+
+                    hotelResults.innerHTML =
+                        "<p>Failed to load hotels.</p>";
+
+                    console.log(error);
+
+                }
+
+            }
+            function selectHotel(name, cost) {
+
+                selectedHotel = name;
+                selectedHotelCost = cost;
+
+                document.getElementById("selectedHotel").value =
+                    `${name} - ₹${cost}/night`;
+
+                const rooms =
+                    Number(document.getElementById("rooms").value);
+
+                const days =
+                    Number(localStorage.getItem("tripDays"));
+
+                const totalCost =
+                    cost * rooms * days;
+
+                document.getElementById("hotelCost").innerHTML =
+                    `<h5>Total Hotel Cost : ₹${totalCost}</h5>`;
+
+                showToast(name + " Selected");
+
+            }
+
+
+            // trip duration calculation
+            function calculateTrip() {
+
+                const from =
+                    new Date(document.getElementById("fromDate").value);
+
+                const to =
+                    new Date(document.getElementById("toDate").value);
+
+                const days =
+                    Math.ceil((to - from) / (1000 * 60 * 60 * 24)) + 1;
+
+                document.getElementById("tripDuration").innerHTML =
+                    `<h5>${days} Days / ${days - 1} Nights</h5>`;
+
+                localStorage.setItem("tripDays", days);
+
+            }
+            // ======calc hotel cost=========
+            function calculateHotelCost() {
+
+                const rooms =
+                    Number(document.getElementById("rooms").value);
+
+                const days =
+                    Number(localStorage.getItem("tripDays"));
+
+                const total =
+                    rooms * selectedHotelCost * days;
+
+                document.getElementById("hotelCost").innerHTML = `
+
+<h5>
+Total Room Cost : ₹${total}
+</h5>
+
+`;
+
+                localStorage.setItem(
+                    "hotelTotal",
+                    total
+                );
+
+            }
+            // day wise plan
+            function generateDays() {
+
+                const days =
+                    Number(localStorage.getItem("tripDays"));
+
+                let html = "";
+
+                for (let i = 1; i <= days; i++) {
+
+                    html += `
+
+<div class="card p-3 mb-3">
+
+<h5>DAY ${i}</h5>
+
+<input
+class="form-control mb-2"
+placeholder="Breakfast">
+
+<input
+class="form-control mb-2"
+placeholder="Place To Visit">
+
+<input
+class="form-control mb-2"
+placeholder="Lunch">
+
+<input
+class="form-control mb-2"
+placeholder="Shopping">
+
+<input
+class="form-control mb-2"
+placeholder="Hotel Return">
+
+<input
+class="form-control mb-2"
+placeholder="Dinner">
+
+</div>
+
+`;
+
+                }
+
+                document.getElementById("tripPlanContainer").innerHTML =
+                    html;
+
+            }
+            const agents = {
+
+                Rahul: {
+                    rating: "4.8",
+                    cost: 2500
+                },
+
+                Priya: {
+                    rating: "4.7",
+                    cost: 2200
+                },
+
+                Amit: {
+                    rating: "4.9",
+                    cost: 3000
+                },
+
+                Sneha: {
+                    rating: "4.6",
+                    cost: 2000
+                }
+
+            };
+            function showAgentDetails() {
+
+                const agent =
+                    document.getElementById("agentSelect").value;
+
+                if (agent === "") return;
+
+                selectedAgent = agent;
+                selectedAgentCost = agents[agent].cost;
+
+                document.getElementById("agentInfo").innerHTML = `
+
+<div class="card p-3">
+
+<h5>${agent}</h5>
+
+<p>⭐ Rating : ${agents[agent].rating}</p>
+
+<p>💰 Cost : ₹${agents[agent].cost}</p>
+
+</div>
+
+`;
+
+            }
+            function bookAgentPlan() {
+
+                const days =
+                    Number(localStorage.getItem("tripDays"));
+
+                const rooms =
+                    Number(document.getElementById("rooms").value);
+
+                const hotelTotal =
+                    selectedHotelCost * rooms * days;
+
+                const grandTotal =
+                    hotelTotal + selectedAgentCost;
+
+                document.getElementById("planSummary").innerHTML = `
+
+<div class="alert alert-info mt-3">
+
+<h5>Booking Summary</h5>
+
+<p>Hotel : ${selectedHotel}</p>
+
+<p>Hotel Cost : ₹${hotelTotal}</p>
+
+<p>Agent : ${selectedAgent}</p>
+
+<p>Agent Cost : ₹${selectedAgentCost}</p>
+
+<hr>
+
+<h4>Total Cost : ₹${grandTotal}</h4>
+
+</div>
+
+`;
+
+            }
+            // submit trip
+
+            function submitTrip() {
+
+                const days =
+                    Number(localStorage.getItem("tripDays"));
+
+                const rooms =
+                    Number(document.getElementById("rooms").value);
+
+                const hotelTotal =
+                    selectedHotelCost * rooms * days;
+
+                const grandTotal =
+                    hotelTotal + selectedAgentCost;
+
+                document.getElementById("finalOutput").innerHTML = `
+
+<div class="alert alert-success">
+
+<h4>✅ Booking Done Successfully</h4>
+
+<p>Hotel : ${selectedHotel}</p>
+
+<p>Agent : ${selectedAgent}</p>
+
+<p>Total Amount : ₹${grandTotal}</p>
+
+<p>
+Agent will contact you within 24 hours.
 </p>
 
 </div>
 
-</div>
+`;
 
-</div>
+            }
 
-</section>
-
-<div id="toast"></div>
-
-<script>
-
-const toast = document.getElementById("toast");
-
-function showToast(message){
-    toast.innerText = message;
-    toast.style.opacity = "1";
-
-    setTimeout(() => {
-        toast.style.opacity = "0";
-    }, 2500);
-}
-
-document.querySelector(".guide-btn").addEventListener("click", () => {
-    document.getElementById("guides").scrollIntoView({
-        behavior:"smooth"
-    });
-});
-
-document.querySelector(".plan-btn").addEventListener("click", () => {
-    showToast("Trip Planner Coming Soon ✈️");
-});
-
-document.querySelector(".save-btn").addEventListener("click", () => {
-
-    let saved =
-    JSON.parse(localStorage.getItem("savedDestinations")) || [];
-
-    if(!saved.includes("Gangotri Dham")){
-
-        saved.push("Gangotri Dham");
-
-        localStorage.setItem(
-            "savedDestinations",
-            JSON.stringify(saved)
-        );
-
-        showToast("Gangotri Dham Saved ❤️");
-    }
-    else{
-        showToast("Already Saved ❤️");
-    }
-
-});
-
-</script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
