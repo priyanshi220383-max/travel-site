@@ -3,476 +3,535 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nainital | TripDen</title>
+<title>Badrinath | TripDen</title>
+<link rel="stylesheet" href="../components/CardStyle.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f5f5f6;
-}
-
-/* MAIN CARD */
-
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:40px auto;
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    display:flex;
-    gap:30px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-
-.destination-img{
-    width:45%;
-}
-
-.destination-img img{
-    width:100%;
-    height:500px;
-    object-fit:cover;
-    border-radius:12px;
-}
-
-.destination-details{
-    width:55%;
-}
-
-.destination-type{
-    color:#666;
-    font-size:18px;
-}
-
-.destination-name{
-    font-size:40px;
-    color:#0b1354;
-    font-weight:bold;
-    margin-top:8px;
-}
-
-.rating{
-    font-size:22px;
-    color:#e67e22;
-    margin-top:10px;
-}
-
-.description{
-    margin-top:20px;
-    line-height:1.8;
-    color:#444;
-}
-
-/* CATEGORY BUTTONS */
-
-.categories{
-    margin-top:25px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
-
-.categories button{
-    padding:12px 18px;
-    border:none;
-    border-radius:8px;
-    background:#0b1354;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.categories button:hover{
-    transform:scale(1.05);
-}
-
-/* ACTION BUTTONS */
-
-.action-buttons{
-    margin-top:25px;
-}
-
-.action-buttons button{
-    padding:12px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin-right:10px;
-    font-size:14px;
-}
-
-.guide-btn{
-    background:#0b1354;
-    color:white;
-}
-
-.plan-btn{
-    background:#1e88e5;
-    color:white;
-}
-
-.save-btn{
-    background:#e91e63;
-    color:white;
-}
-
-/* TABLE */
-
-table{
-    margin-top:25px;
-    width:100%;
-    border-collapse:collapse;
-}
-
-th,td{
-    border:1px solid #ddd;
-    padding:10px;
-    text-align:left;
-}
-
-th{
-    background:#f2f2f2;
-}
-
-/* FEATURED GUIDES */
-
-.guides{
-    width:90%;
-    max-width:1200px;
-    margin:50px auto;
-}
-
-.section-title{
-    text-align:center;
-    color:#0b1354;
-    margin-bottom:30px;
-    font-size:32px;
-}
-
-.guide-grid{
-    display:flex;
-    gap:25px;
-    overflow-x:auto;
-    scroll-behavior:smooth;
-    padding-bottom:15px;
-}
-
-.guide-grid::-webkit-scrollbar{
-    height:8px;
-}
-
-.guide-grid::-webkit-scrollbar-track{
-    background:#f1f1f1;
-    border-radius:10px;
-}
-
-.guide-grid::-webkit-scrollbar-thumb{
-    background:#0b1354;
-    border-radius:10px;
-}
-.guide-card{
-    min-width:320px;
-    max-width:320px;
-    background:white;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    transition:0.3s;
-    flex-shrink:0;
-}
-
-.guide-card:hover{
-    transform:translateY(-5px);
-}
-
-.guide-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-
-.guide-content{
-    padding:18px;
-}
-
-.guide-content h3{
-    color:#0b1354;
-    margin-bottom:10px;
-}
-
-/* TOAST */
-
-#toast{
-    position:fixed;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#0b1354;
-    color:white;
-    padding:12px 25px;
-    border-radius:6px;
-    opacity:0;
-    transition:0.3s;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.container{
-    flex-direction:column;
-}
-
-.destination-img,
-.destination-details{
-    width:100%;
-}
-
-.destination-img img{
-    height:350px;
-}
-
-.destination-name{
-    font-size:30px;
-}
-
-}
-
-</style>
 </head>
-
 <body>
+ <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../images/logo.jpg" alt="TripDen Logo" width="70" height="40">
+        TripDen
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#destinations">Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#itinerary">Itinerary</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">MORE</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#Packages">Packages Made</a></li>
+              <li><a class="dropdown-item" href="#ratings">Ratings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#Testimonials">Traveler Testimonials</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="container-main">
 
-<div class="container">
+  <div class="destination-img">
+    <img src="https://s7ap1.scene7.com/is/image/incredibleindia/badrinath-temple-badrinath-uttarakhand-city-ff?qlt=82&ts=1726646641575" alt="Badrinath Temple">
+  </div>
 
-    <div class="destination-img">
+  <div class="destination-details">
 
-        <img src="https://s7ap1.scene7.com/is/image/incredibleindia/badrinath-temple-badrinath-uttarakhand-city-ff?qlt=82&ts=1726646641575">
+    <div class="destination-type">Pilgrimage Destination</div>
+    <div class="destination-name">Badrinath</div>
+    <div class="rating">⭐ 4.8 / 5 Tourist Rating</div>
 
+    <p class="description">
+      Badrinath is one of the most revered pilgrimage destinations in India and a key part of the Char Dham Yatra.
+      Situated on the banks of the Alaknanda River amidst the majestic Himalayas, Badrinath is famous for the sacred
+      Badrinath Temple dedicated to Lord Vishnu. Surrounded by snow-covered peaks, hot springs and breathtaking
+      landscapes, it attracts devotees and nature lovers from across the world.
+    </p>
+
+    <div class="categories">
+      <button>🍽 Restaurants</button>
+      <button>☕ Cafes</button>
+      <button>🛍 Shopping</button>
+      <button>🏕 Activities</button>
+      <button>🏔 View Points</button>
+      <button>🌲 Nature Walks</button>
     </div>
 
-    <div class="destination-details">
-
-        <div class="destination-type">
-            Pilgrimage Destination
-        </div>
-
-        <div class="destination-name">
-            Badrinath
-        </div>
-
-        <div class="rating">
-            ⭐ 4.8 / 5 Tourist Rating
-        </div>
-
-        <p class="description">
-            Badrinath is one of the most revered pilgrimage destinations in India and a key part of the Char Dham Yatra.
-            Situated on the banks of the Alaknanda River amidst the majestic Himalayas, Badrinath is famous for the sacred
-            Badrinath Temple dedicated to Lord Vishnu. Surrounded by snow-covered peaks, hot springs and breathtaking
-            landscapes, it attracts devotees and nature lovers from across the world.
-        </p>
-
-        <div class="categories">
-            <button>🍽 Restaurants</button>
-            <button>☕ Cafes</button>
-            <button>🛍 Shopping</button>
-            <button>🏕 Activities</button>
-            <button>🏔 View Points</button>
-            <button>🌲 Nature Walks</button>
-        </div>
-
-        <div class="action-buttons">
-
-            <button class="guide-btn">
-                Explore Guide
-            </button>
-
-            <button class="plan-btn">
-                Plan Trip
-            </button>
-
-            <button class="save-btn">
-                Save Destination
-            </button>
-
-        </div>
-        <table>
-        
-            <tr>
-<td>State</td>
-<td>Uttarakhand</td>
-</tr>
-
-<tr>
-<td>Best Time</td>
-<td>May - June & September - October</td>
-</tr>
-
-<tr>
-<td>Altitude</td>
-<td>3133 m</td>
-</tr>
-
-<tr>
-<td>Famous For</td>
-<td>Badrinath Temple</td>
-</tr>
-
-<tr>
-<td>Trip Duration</td>
-<td>2 - 3 Days</td>
-</tr>
-
-<tr>
-<td>Nearest Railway Station</td>
-<td>Rishikesh</td>
-</tr>
-
-<tr>
-<td>Nearest Airport</td>
-<td>Jolly Grant Airport, Dehradun</td>
-</tr>
-        </table>
-
+    <div class="action-buttons">
+      <button class="guide-btn">Explore Guide</button>
+      <button class="pkg-btn">Explore Packages</button>
+      <button class="plan-btn">Plan Trip</button>
+      <button class="save-btn">Save Destination</button>
     </div>
 
+    <table>
+      <tr><td><strong>State</strong></td><td>Uttarakhand</td></tr>
+      <tr><td><strong>Best Time</strong></td><td>May – June &amp; September – October</td></tr>
+      <tr><td><strong>Altitude</strong></td><td>3,133 m</td></tr>
+      <tr><td><strong>Famous For</strong></td><td>Badrinath Temple, Char Dham</td></tr>
+      <tr><td><strong>Nearest Railway</strong></td><td>Rishikesh</td></tr>
+      <tr><td><strong>Nearest Airport</strong></td><td>Jolly Grant Airport, Dehradun</td></tr>
+    </table>
+
+  </div>
 </div>
 
-<section class="guides" id="guides">
 
-<h2 class="section-title">
-Featured Guides
-</h2>
+<!-- ═══════════════════════════════════════════
+     PACKAGES SECTION
+═══════════════════════════════════════════ -->
+<div class="section-wrap" id="packages">
+  <h2 class="section-title">Tour Packages</h2>
 
-<div class="guide-grid">
+  <div class="scroll-track">
 
-<div class="guide-card">
+    <!-- Package 1 -->
+    <div class="pkg-card">
+      <img src="https://imgcld.yatra.com/ytimages/image/upload/v1438772700/Badrinath_48.jpg" alt="Do Dham Yatra">
+      <div class="pkg-card-body">
+        <div class="pkg-name">Do Dham Yatra</div>
+        <div class="pkg-duration">⏱ 5 Days / 4 Nights</div>
+        <p class="pkg-desc">Cover Kedarnath & Badrinath in one sacred journey. Includes temple darshan, Mana Village visit and hot spring soak at Tapt Kund.</p>
+        <div class="pkg-price">Starting ₹10,499</div>
+        <div class="pkg-tags">
+          <span class="pkg-tag">🏨 Hotel</span>
+          <span class="pkg-tag">🚌 Transport</span>
+          <span class="pkg-tag">🍱 Meals</span>
+          <span class="pkg-tag">🧭 Guide</span>
+        </div>
+        <button class="view-more-btn" onclick="openPackage('doDham')">View More</button>
+      </div>
+    </div>
 
-<img src="https://www.mystreal.com/_next/image/?url=%2Ftemple%2Fbadrinath-temple%2Fconclusion.jpeg&w=3840&q=75">
+    <!-- Package 2 -->
+    <div class="pkg-card">
+      <img src="https://static.toiimg.com/photo/msid-87566208,width-96,height-65.cms" alt="Char Dham Yatra">
+      <div class="pkg-card-body">
+        <div class="pkg-name">Char Dham Yatra</div>
+        <div class="pkg-duration">⏱ 11 Days / 10 Nights</div>
+        <p class="pkg-desc">The complete sacred circuit — Yamunotri, Gangotri, Kedarnath, Badrinath. A once-in-a-lifetime Himalayan pilgrimage.</p>
+        <div class="pkg-price">Starting ₹21,999</div>
+        <div class="pkg-tags">
+          <span class="pkg-tag">🏨 Hotel</span>
+          <span class="pkg-tag">🚌 Transport</span>
+          <span class="pkg-tag">🍱 Meals</span>
+          <span class="pkg-tag">🧭 Guide</span>
+        </div>
+        <button class="view-more-btn" onclick="openPackage('charDham')">View More</button>
+      </div>
+    </div>
 
-<div class="guide-content">
-<h3>Places To Visit</h3>
-<p>
-Visit Badrinath Temple, Tapt Kund, Mana Village, Vyas Gufa, Bhim Pul and Charan Paduka.
-</p>
+    <!-- Package 3 -->
+    <div class="pkg-card">
+      <img src="https://www.mystreal.com/_next/image/?url=%2Ftemple%2Fbadrinath-temple%2Fconclusion.jpeg&w=3840&q=75" alt="Badrinath Darshan">
+      <div class="pkg-card-body">
+        <div class="pkg-name">Badrinath Darshan</div>
+        <div class="pkg-duration">⏱ 3 Days / 2 Nights</div>
+        <p class="pkg-desc">A focused Badrinath experience — temple darshan, Mana village, Vyas Gufa, Bhim Pul and the scenic Alaknanda ghats.</p>
+        <div class="pkg-price">Starting ₹6,999</div>
+        <div class="pkg-tags">
+          <span class="pkg-tag">🏨 Hotel</span>
+          <span class="pkg-tag">🚌 Transport</span>
+          <span class="pkg-tag">🧭 Guide</span>
+        </div>
+        <button class="view-more-btn" onclick="openPackage('badriDarshan')">View More</button>
+      </div>
+    </div>
+
+    <!-- Package 4 -->
+    <div class="pkg-card">
+      <img src="https://chalbanjare.com/crmnew/img_master/package/IMG_20251223_162917_17667464221.webp" alt="Valley of Flowers & Badrinath">
+      <div class="pkg-card-body">
+        <div class="pkg-name">Valley of Flowers Combo</div>
+        <div class="pkg-duration">⏱ 7 Days / 6 Nights</div>
+        <p class="pkg-desc">Combine Badrinath darshan with the stunning Valley of Flowers trek and Hemkund Sahib — a spiritual-nature mashup.</p>
+        <div class="pkg-price">Starting ₹14,999</div>
+        <div class="pkg-tags">
+          <span class="pkg-tag">🏨 Hotel</span>
+          <span class="pkg-tag">🚌 Transport</span>
+          <span class="pkg-tag">🍱 Meals</span>
+          <span class="pkg-tag">🥾 Trek Gear</span>
+        </div>
+        <button class="view-more-btn" onclick="openPackage('valleyCombo')">View More</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     FEATURED GUIDES SECTION
+═══════════════════════════════════════════ -->
+<div class="section-wrap" id="guides">
+  <h2 class="section-title">Featured Guides</h2>
+
+  <div class="scroll-track">
+
+    <div class="guide-card">
+      <img src="https://www.mystreal.com/_next/image/?url=%2Ftemple%2Fbadrinath-temple%2Fconclusion.jpeg&w=3840&q=75" alt="Places To Visit">
+      <div class="guide-content">
+        <h3>Places To Visit</h3>
+        <p>Visit Badrinath Temple, Tapt Kund, Mana Village, Vyas Gufa, Bhim Pul and Charan Paduka.</p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://chalbanjare.com/crmnew/img_master/package/IMG_20251223_162917_17667464221.webp" alt="Activities">
+      <div class="guide-content">
+        <h3>Activities To Do</h3>
+        <p>Explore trekking routes, spiritual journeys, village walks, photography and scenic Himalayan excursions.</p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://images.trvl-media.com/lodging/120000000/119010000/119008700/119008665/8fed3c63.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" alt="Food Guide">
+      <div class="guide-content">
+        <h3>Food Guide</h3>
+        <p>Enjoy traditional vegetarian meals, local Garhwali cuisine, temple prasad and authentic mountain flavors.</p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://www.ftd.travel/upload/shopping_image/thumbs/2013-06-20-02-36-13badrinath-shopping.jpg" alt="Shopping">
+      <div class="guide-content">
+        <h3>Shopping Guide</h3>
+        <p>Shop for religious souvenirs, prayer items, Rudraksha malas, woollens and local handicrafts.</p>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://static.toiimg.com/photo/110601913.cms" alt="View Points">
+      <div class="guide-content">
+        <h3>Scenic View Points</h3>
+        <p>Witness magnificent views of Neelkanth Peak, Alaknanda Valley, Mana Pass and surrounding Himalayan ranges.</p>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="guide-card">
 
-<img src="https://chalbanjare.com/crmnew/img_master/package/IMG_20251223_162917_17667464221.webp">
+<!-- ═══════════════════════════════════════════
+     INQUIRY FORM
+═══════════════════════════════════════════ -->
+<div class="inquiry-section" id="inquiry">
+  <h2>Send an Enquiry</h2>
+  <p class="sub">Our travel agent will get back to you within 24 hours.</p>
 
-<div class="guide-content">
-<h3>Activities To Do</h3>
-<p>
-Explore trekking routes, spiritual journeys, village walks, photography and scenic Himalayan excursions.
-</p>
+  <div class="inq-grid">
+    <div class="inq-field">
+      <label>Full Name</label>
+      <input type="text" id="inqName" placeholder="Your full name">
+    </div>
+    <div class="inq-field">
+      <label>Phone Number</label>
+      <input type="tel" id="inqPhone" placeholder="+91 00000 00000">
+    </div>
+    <div class="inq-field">
+      <label>Email Address</label>
+      <input type="email" id="inqEmail" placeholder="you@email.com">
+    </div>
+    <div class="inq-field">
+      <label>Number of Travellers</label>
+      <input type="number" id="inqTravellers" placeholder="e.g. 4" min="1">
+    </div>
+    <div class="inq-field">
+      <label>Starting Date</label>
+      <input type="date" id="inqFrom">
+    </div>
+    <div class="inq-field">
+      <label>Ending Date</label>
+      <input type="date" id="inqTo">
+    </div>
+    <div class="inq-field inq-full">
+      <label>Message</label>
+      <textarea id="inqMsg" rows="4" placeholder="Tell us about your travel preferences, any special requirements..."></textarea>
+    </div>
+  </div>
+
+  <button class="inq-submit" onclick="submitInquiry()">Send Enquiry →</button>
+</div>
+ <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h3>TripDen</h3>
+        <p>Plan your perfect Uttarakhand journey with ease. Explore destinations, build itineraries, and book trusted travel agents.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#itinerary">Itinerary</a></li>
+          <li><a href="#Packages">Packages</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p>Email: support@tripden.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>India</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TripDen. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+<!-- ═══════════════════════════════════════════
+     BOOTSTRAP OFFCANVAS
+═══════════════════════════════════════════ -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="pkgOffcanvas" aria-labelledby="pkgOffcanvasLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="pkgOffcanvasLabel" style="color:#0b1354; font-weight:800;">Package Details</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+
+    <img id="ocImg" src="" alt="" class="offcanvas-pkg-img">
+    <div class="offcanvas-title-main" id="ocTitle"></div>
+    <div class="offcanvas-duration-label" id="ocDuration"></div>
+
+    <p style="font-size:13px; color:#555; margin-bottom:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px;">Destinations</p>
+    <div class="dest-list" id="ocDests"></div>
+
+    <p style="font-size:13px; color:#555; margin-bottom:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px;">Amenities Included</p>
+    <div class="amenity-btns" id="ocAmenities"></div>
+
+    <div class="toggle-btns">
+      <button class="toggle-btn active" id="btnItinerary" onclick="showTab('itinerary')">📋 Itinerary</button>
+      <button class="toggle-btn" id="btnInclusion" onclick="showTab('inclusion')">✅ Inclusions</button>
+    </div>
+
+    <!-- Itinerary Table -->
+    <div id="tabItinerary">
+      <table class="detail-table" id="ocItineraryTable"></table>
+    </div>
+
+    <!-- Inclusions Table -->
+    <div id="tabInclusion" style="display:none;">
+      <table class="detail-table" id="ocInclusionTable"></table>
+    </div>
+
+  </div>
 </div>
 
-</div>
 
-<div class="guide-card">
-
-<img src="https://images.trvl-media.com/lodging/120000000/119010000/119008700/119008665/8fed3c63.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill">
-
-<div class="guide-content">
-<h3>Food Guide</h3>
-<p>
-Enjoy traditional vegetarian meals, local Garhwali cuisine, temple prasad and authentic mountain flavors.
-</p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://www.ftd.travel/upload/shopping_image/thumbs/2013-06-20-02-36-13badrinath-shopping.jpg">
-
-<div class="guide-content">
-<h3>Shopping Guide</h3>
-<p>
-Shop for religious souvenirs, prayer items, Rudraksha malas, woollens and local handicrafts.
-</p>
-</div>
-
-</div>
-
-<div class="guide-card">
-
-<img src="https://static.toiimg.com/photo/110601913.cms">
-
-<div class="guide-content">
-<h3>Scenic View Points</h3>
-
-<p>
-Witness magnificent views of Neelkanth Peak, Alaknanda Valley, Mana Pass and the surrounding Himalayan ranges.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+<!-- TOAST -->
 <div id="toast"></div>
 
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
-const toast = document.getElementById("toast");
+/* ── PACKAGE DATA ── */
+const packages = {
 
-function showToast(message){
-    toast.innerText = message;
-    toast.style.opacity = "1";
+  doDham: {
+    img: "https://imgcld.yatra.com/ytimages/image/upload/v1438772700/Badrinath_48.jpg",
+    title: "Do Dham Yatra",
+    duration: "5 Days / 4 Nights",
+    dests: ["Kedarnath","Badrinath","Mana Village","Tapt Kund"],
+    amenities: ["🏨 Hotel","🚌 Transport","🍱 Meals","🧭 Guide","🔭 Sightseeing"],
+    itinerary: [
+      ["Day 1","Haridwar → Guptkashi. Check-in, evening aarti at temple ghats."],
+      ["Day 2","Guptkashi → Kedarnath (helicopter/trek). Temple darshan. Overnight stay."],
+      ["Day 3","Return to Sonprayag. Drive to Badrinath. Check-in."],
+      ["Day 4","Badrinath Temple darshan. Mana Village, Vyas Gufa, Bhim Pul, Tapt Kund."],
+      ["Day 5","Return drive to Haridwar. Tour ends."]
+    ],
+    included: ["Hotel accommodation (3-star)","All meals (veg)","AC transport throughout","Expert pilgrim guide","Temple entry assistance"],
+    notIncluded: ["Helicopter charges (optional)","Personal expenses","Extra activities","Porter charges"]
+  },
 
-    setTimeout(() => {
-        toast.style.opacity = "0";
-    }, 2500);
+  charDham: {
+    img: "https://static.toiimg.com/photo/msid-87566208,width-96,height-65.cms",
+    title: "Char Dham Yatra",
+    duration: "11 Days / 10 Nights",
+    dests: ["Yamunotri","Gangotri","Kedarnath","Badrinath"],
+    amenities: ["🏨 Hotel","🚌 Transport","🍱 Meals","🧭 Guide","🔭 Sightseeing"],
+    itinerary: [
+      ["Day 1–2","Haridwar → Yamunotri. Trek, temple darshan, thermal springs."],
+      ["Day 3–4","Yamunotri → Gangotri. Ganga aarti, Gangotri temple darshan, Gaumukh views."],
+      ["Day 5–7","Gangotri → Guptkashi → Kedarnath. Temple darshan, overnight at dham."],
+      ["Day 8–10","Kedarnath → Badrinath. Darshan, Mana Village, Neelkanth Peak views."],
+      ["Day 11","Badrinath → Haridwar. Tour concludes."]
+    ],
+    included: ["10 nights accommodation","All meals","Luxury AC coach","Certified pilgrimage guide","All dham entry arrangements"],
+    notIncluded: ["Flight/train to Haridwar","Personal expenses","Pony/palanquin charges","Travel insurance"]
+  },
+
+  badriDarshan: {
+    img: "https://www.mystreal.com/_next/image/?url=%2Ftemple%2Fbadrinath-temple%2Fconclusion.jpeg&w=3840&q=75",
+    title: "Badrinath Darshan",
+    duration: "3 Days / 2 Nights",
+    dests: ["Badrinath Temple","Mana Village","Vyas Gufa","Bhim Pul","Tapt Kund"],
+    amenities: ["🏨 Hotel","🚌 Transport","🧭 Guide","🔭 Sightseeing"],
+    itinerary: [
+      ["Day 1","Rishikesh / Haridwar → Joshimath. Scenic drive via Devprayag. Check-in."],
+      ["Day 2","Joshimath → Badrinath. Temple darshan at sunrise. Mana Village, Vyas Gufa, Bhim Pul. Hot dip at Tapt Kund."],
+      ["Day 3","Morning views of Neelkanth Peak. Drive back to Rishikesh. Tour ends."]
+    ],
+    included: ["2 nights hotel","AC Tempo Traveller","Local guide","All sightseeing"],
+    notIncluded: ["Meals","Personal expenses","Entry fees (if any)","Rishikesh pick-up surcharge"]
+  },
+
+  valleyCombo: {
+    img: "https://chalbanjare.com/crmnew/img_master/package/IMG_20251223_162917_17667464221.webp",
+    title: "Valley of Flowers Combo",
+    duration: "7 Days / 6 Nights",
+    dests: ["Badrinath","Valley of Flowers","Hemkund Sahib","Ghangaria"],
+    amenities: ["🏨 Hotel","🚌 Transport","🍱 Meals","🧭 Guide","🥾 Trek Gear"],
+    itinerary: [
+      ["Day 1","Rishikesh → Joshimath. Acclimatization walk. Check-in."],
+      ["Day 2","Joshimath → Badrinath. Temple darshan, evening Ganga aarti."],
+      ["Day 3","Badrinath → Govindghat. Trek to Ghangaria (9 km)."],
+      ["Day 4","Ghangaria → Valley of Flowers (3 km). Trek through the UNESCO meadow."],
+      ["Day 5","Ghangaria → Hemkund Sahib (6 km). Glacial lake, Gurudwara visit."],
+      ["Day 6","Trek back to Govindghat. Drive to Rishikesh."],
+      ["Day 7","Leisure morning. Departure."]
+    ],
+    included: ["6 nights accommodation","All meals on trek","Transport (Rishikesh–Govindghat)","Certified trek guide","Basic trek equipment"],
+    notIncluded: ["Mules/horses (optional)","Personal trekking gear","Travel insurance","Personal expenses"]
+  }
+
+};
+
+/* ── OPEN OFFCANVAS ── */
+function openPackage(key) {
+  const p = packages[key];
+  if (!p) return;
+
+  document.getElementById('ocImg').src = p.img;
+  document.getElementById('ocTitle').textContent = p.title;
+  document.getElementById('ocDuration').textContent = '⏱ ' + p.duration;
+
+  // Destinations
+  const destsEl = document.getElementById('ocDests');
+  destsEl.innerHTML = p.dests.map(d => `<span class="dest-chip">${d}</span>`).join('');
+
+  // Amenities
+  const amenEl = document.getElementById('ocAmenities');
+  amenEl.innerHTML = p.amenities.map(a => `<span class="amenity-btn">${a}</span>`).join('');
+
+  // Itinerary table
+  const iTable = document.getElementById('ocItineraryTable');
+  iTable.innerHTML = `<tr><th>Day</th><th>Plan</th></tr>` +
+    p.itinerary.map(([day, plan]) => `<tr><td><strong>${day}</strong></td><td>${plan}</td></tr>`).join('');
+
+  // Inclusions table
+  const incTable = document.getElementById('ocInclusionTable');
+  const inclRows = p.included.map(i => `<tr><td class="incl">✓ Included</td><td>${i}</td></tr>`).join('');
+  const exclRows = p.notIncluded.map(i => `<tr><td class="excl">✗ Not Included</td><td>${i}</td></tr>`).join('');
+  incTable.innerHTML = `<tr><th>Status</th><th>Item</th></tr>` + inclRows + exclRows;
+
+  // Reset tabs
+  showTab('itinerary');
+
+  const offcanvas = new bootstrap.Offcanvas(document.getElementById('pkgOffcanvas'));
+  offcanvas.show();
 }
 
+/* ── TOGGLE TABS ── */
+function showTab(tab) {
+  document.getElementById('tabItinerary').style.display = tab === 'itinerary' ? 'block' : 'none';
+  document.getElementById('tabInclusion').style.display = tab === 'inclusion' ? 'block' : 'none';
+  document.getElementById('btnItinerary').classList.toggle('active', tab === 'itinerary');
+  document.getElementById('btnInclusion').classList.toggle('active', tab === 'inclusion');
+}
+
+/* ── TOAST ── */
+const toast = document.getElementById("toast");
+function showToast(message) {
+  toast.innerText = message;
+  toast.style.opacity = "1";
+  setTimeout(() => { toast.style.opacity = "0"; }, 3500);
+}
+
+/* ── ACTION BUTTONS ── */
 document.querySelector(".guide-btn").addEventListener("click", () => {
-    document.getElementById("guides").scrollIntoView({
-        behavior:"smooth"
-    });
+  document.getElementById("guides").scrollIntoView({ behavior: "smooth" });
+});
+
+document.querySelector(".pkg-btn").addEventListener("click", () => {
+  document.getElementById("packages").scrollIntoView({ behavior: "smooth" });
 });
 
 document.querySelector(".plan-btn").addEventListener("click", () => {
-    showToast("Trip Planner Coming Soon ✈️");
+  document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
+  showToast("Fill in the form below and we'll plan your perfect trip! ✈️");
 });
 
 document.querySelector(".save-btn").addEventListener("click", () => {
-
-    let saved =
-    JSON.parse(localStorage.getItem("savedDestinations")) || [];
-
-    if(!saved.includes("Nainital")){
-
-        saved.push("Nainital");
-
-        localStorage.setItem(
-            "savedDestinations",
-            JSON.stringify(saved)
-        );
-
-        showToast("Nainital Saved ❤️");
-    }
-    else{
-        showToast("Already Saved ❤️");
-    }
-
+  let saved = JSON.parse(localStorage.getItem("savedDestinations")) || [];
+  if (!saved.includes("Badrinath")) {
+    saved.push("Badrinath");
+    localStorage.setItem("savedDestinations", JSON.stringify(saved));
+    showToast("Badrinath Saved ❤️");
+  } else {
+    showToast("Already in your saved list ❤️");
+  }
 });
 
-</script>
+/* ── INQUIRY FORM ── */
+function submitInquiry() {
+  const name     = document.getElementById('inqName').value.trim();
+  const phone    = document.getElementById('inqPhone').value.trim();
+  const email    = document.getElementById('inqEmail').value.trim();
+  const travellers = document.getElementById('inqTravellers').value.trim();
+  const from     = document.getElementById('inqFrom').value;
+  const to       = document.getElementById('inqTo').value;
+  const msg      = document.getElementById('inqMsg').value.trim();
 
+  if (!name)        { showToast("⚠️ Please enter your name."); return; }
+  if (!phone || phone.length < 7) { showToast("⚠️ Please enter a valid phone number."); return; }
+  if (!email || !email.includes('@')) { showToast("⚠️ Please enter a valid email address."); return; }
+  if (!travellers || travellers < 1) { showToast("⚠️ Please enter the number of travellers."); return; }
+  if (!from)        { showToast("⚠️ Please select a starting date."); return; }
+  if (!to)          { showToast("⚠️ Please select an ending date."); return; }
+  if (to < from)    { showToast("⚠️ Ending date must be after starting date."); return; }
+
+  // Clear form
+  ['inqName','inqPhone','inqEmail','inqTravellers','inqFrom','inqTo','inqMsg']
+    .forEach(id => { document.getElementById(id).value = ''; });
+
+  showToast("✅ Your enquiry has been sent! Our agent will contact you within 24 hours.");
+}
+
+</script>
 </body>
 </html>
