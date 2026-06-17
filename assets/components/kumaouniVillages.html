@@ -356,19 +356,101 @@
       document.getElementById('btnItinerary').classList.toggle('active', tab === 'itinerary');
       document.getElementById('btnInclusion').classList.toggle('active', tab === 'inclusion');
     }
-    function submitInquiry() {
-      const n = document.getElementById('inqName').value.trim(), ph = document.getElementById('inqPhone').value.trim(), em = document.getElementById('inqEmail').value.trim(), tr = document.getElementById('inqTravellers').value.trim(), fr = document.getElementById('inqFrom').value, to = document.getElementById('inqTo').value;
-      if (!n) { showToast("⚠️ Please enter your name."); return; }
-      if (!ph || ph.length < 7) { showToast("⚠️ Please enter a valid phone number."); return; }
-      if (!em || !em.includes('@')) { showToast("⚠️ Please enter a valid email."); return; }
-      if (!tr || tr < 1) { showToast("⚠️ Please enter number of travellers."); return; }
-      if (!fr) { showToast("⚠️ Please select a starting date."); return; }
-      if (!to) { showToast("⚠️ Please select an ending date."); return; }
-      if (to < fr) { showToast("⚠️ Ending date must be after starting date."); return; }
-      ['inqName', 'inqPhone', 'inqEmail', 'inqTravellers', 'inqFrom', 'inqTo', 'inqMsg'].forEach(id => { document.getElementById(id).value = ''; });
-      showToast("✅ Enquiry sent! Our agent will contact you within 24 hours.");
-    }
+   function submitInquiry() {
 
+  const n  = document.getElementById('inqName').value.trim();
+  const ph = document.getElementById('inqPhone').value.trim();
+  const em = document.getElementById('inqEmail').value.trim();
+  const tr = document.getElementById('inqTravellers').value.trim();
+  const fr = document.getElementById('inqFrom').value;
+  const to = document.getElementById('inqTo').value;
+  const msg = document.getElementById('inqMsg').value.trim();
+
+
+  if (!n) {
+    showToast("⚠️ Please enter your name.");
+    return;
+  }
+
+  if (!ph || ph.length < 7) {
+    showToast("⚠️ Please enter a valid phone number.");
+    return;
+  }
+
+  if (!em || !em.includes('@')) {
+    showToast("⚠️ Please enter a valid email address.");
+    return;
+  }
+
+  if (!tr || tr < 1) {
+    showToast("⚠️ Please enter number of travellers.");
+    return;
+  }
+
+  if (!fr) {
+    showToast("⚠️ Select starting date.");
+    return;
+  }
+
+  if (!to) {
+    showToast("⚠️ Select ending date.");
+    return;
+  }
+
+
+  // THIS WILL SHOW QUERY IN CONSOLE
+  const enquiry = {
+
+    name: n,
+    phone: ph,
+    email: em,
+    travellers: tr,
+    startDate: fr,
+    endDate: to,
+    message: msg,
+    destination: "Gairsain",
+    time: new Date().toLocaleString()
+
+  };
+
+
+  console.log("===== NEW TRAVEL ENQUIRY =====");
+  console.log(enquiry);
+  console.log("==============================");
+
+
+  // optional save in browser
+  let oldQueries = JSON.parse(localStorage.getItem("queries")) || [];
+
+  oldQueries.push(enquiry);
+
+  localStorage.setItem(
+    "queries",
+    JSON.stringify(oldQueries)
+  );
+
+
+  // clear form
+
+  [
+    'inqName',
+    'inqPhone',
+    'inqEmail',
+    'inqTravellers',
+    'inqFrom',
+    'inqTo',
+    'inqMsg'
+  ]
+  .forEach(id=>{
+    document.getElementById(id).value="";
+  });
+
+
+  showToast(
+    "✅ Query sent! Our agent will contact you within 24 hours."
+  );
+
+}
     document.querySelector(".guide-btn").addEventListener("click", () => document.getElementById("guides").scrollIntoView({ behavior: "smooth" }));
     document.querySelector(".pkg-btn").addEventListener("click", () => document.getElementById("packages").scrollIntoView({ behavior: "smooth" }));
     document.querySelector(".plan-btn").addEventListener("click", () => { document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" }); showToast("Fill the form below and we'll plan your trip! ✈️"); });

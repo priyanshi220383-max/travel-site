@@ -48,8 +48,7 @@
 
 <div class="container-main">
   <div class="destination-img">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Gairsain_Uttarakhand.jpg/640px-Gairsain_Uttarakhand.jpg" alt="Gairsain Chamoli"
-      onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg'">
+    <img src="https://c.ndtvimg.com/2020-06/9fhj1qcg_gairsain-vidhansabha_625x300_08_June_20.jpg" alt="Gairsain Chamoli">
   </div>
   <div class="destination-details">
 
@@ -99,7 +98,7 @@
   <div class="scroll-track">
 
     <div class="pkg-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg" alt="Gairsain Heritage Stay">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg_F3PLLf3QXcOTDPR6QnMQszuARW-ZE1X1AdJ1ifg1W_Wb02MaLa3b_c&s=10" alt="Gairsain Heritage Stay">
       <div class="pkg-card-body">
         <div class="pkg-name">Gairsain Heritage Stay</div>
         <div class="pkg-duration">⏱ 2 Days / 1 Night</div>
@@ -116,7 +115,7 @@
     </div>
 
     <div class="pkg-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg" alt="Chamoli Valley Explorer">
+      <img src="https://blog.yatradham.org/wp-content/uploads/2024/06/Karnaprayag-River-Places-to-Visit-Photos-History-and-Distance2.jpg" alt="Chamoli Valley Explorer">
       <div class="pkg-card-body">
         <div class="pkg-name">Chamoli Valley Explorer</div>
         <div class="pkg-duration">⏱ 4 Days / 3 Nights</div>
@@ -133,7 +132,7 @@
     </div>
 
     <div class="pkg-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg" alt="Gairsain to Badrinath Route">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa3fZqLj_yc2IUv5UyvzVKhPD7E6rVzPasboBtLoW2YtPs4UXp1FDZ_N0&s=10" alt="Gairsain to Badrinath Route">
       <div class="pkg-card-body">
         <div class="pkg-name">Gairsain to Badrinath Route</div>
         <div class="pkg-duration">⏱ 6 Days / 5 Nights</div>
@@ -150,7 +149,7 @@
     </div>
 
     <div class="pkg-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg" alt="Nanda Devi Raj Jaat Trail">
+      <img src="https://nagarjunatravels.com/images/post-images/1761556448.webp" alt="Nanda Devi Raj Jaat Trail">
       <div class="pkg-card-body">
         <div class="pkg-name">Nanda Devi Raj Jaat Trail</div>
         <div class="pkg-duration">⏱ 5 Days / 4 Nights</div>
@@ -175,7 +174,7 @@
   <div class="scroll-track">
 
     <div class="guide-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Almora_Panorama.jpg/640px-Almora_Panorama.jpg" alt="Summer Capital">
+      <img src="https://rishikeshdaytour.com/blog/wp-content/uploads/2022/11/Valley-View-1.jpg" alt="Summer Capital">
       <div class="guide-content">
         <h3>Uttarakhand's Summer Capital</h3>
         <p>Declared the summer capital of Uttarakhand in 2020, Gairsain's Bhararisain Vidhan Sabha building sits on a hilltop with commanding views of the Garhwal and Kumaon ranges. The decision ended a 20-year political debate.</p>
@@ -407,25 +406,99 @@ function showTab(tab) {
 }
 
 function submitInquiry() {
+
   const n  = document.getElementById('inqName').value.trim();
   const ph = document.getElementById('inqPhone').value.trim();
   const em = document.getElementById('inqEmail').value.trim();
   const tr = document.getElementById('inqTravellers').value.trim();
   const fr = document.getElementById('inqFrom').value;
   const to = document.getElementById('inqTo').value;
+  const msg = document.getElementById('inqMsg').value.trim();
 
-  if (!n)                        { showToast("⚠️ Please enter your name."); return; }
-  if (!ph || ph.length < 7)     { showToast("⚠️ Please enter a valid phone number."); return; }
-  if (!em || !em.includes('@')) { showToast("⚠️ Please enter a valid email address."); return; }
-  if (!tr || tr < 1)            { showToast("⚠️ Please enter the number of travellers."); return; }
-  if (!fr)                       { showToast("⚠️ Please select a starting date."); return; }
-  if (!to)                       { showToast("⚠️ Please select an ending date."); return; }
-  if (to < fr)                   { showToast("⚠️ Ending date must be after starting date."); return; }
 
-  ['inqName','inqPhone','inqEmail','inqTravellers','inqFrom','inqTo','inqMsg']
-    .forEach(id => { document.getElementById(id).value = ''; });
+  if (!n) {
+    showToast("⚠️ Please enter your name.");
+    return;
+  }
 
-  showToast("✅ Your enquiry has been sent! Our agent will contact you within 24 hours.");
+  if (!ph || ph.length < 7) {
+    showToast("⚠️ Please enter a valid phone number.");
+    return;
+  }
+
+  if (!em || !em.includes('@')) {
+    showToast("⚠️ Please enter a valid email address.");
+    return;
+  }
+
+  if (!tr || tr < 1) {
+    showToast("⚠️ Please enter number of travellers.");
+    return;
+  }
+
+  if (!fr) {
+    showToast("⚠️ Select starting date.");
+    return;
+  }
+
+  if (!to) {
+    showToast("⚠️ Select ending date.");
+    return;
+  }
+
+
+  // THIS WILL SHOW QUERY IN CONSOLE
+  const enquiry = {
+
+    name: n,
+    phone: ph,
+    email: em,
+    travellers: tr,
+    startDate: fr,
+    endDate: to,
+    message: msg,
+    destination: "Gairsain",
+    time: new Date().toLocaleString()
+
+  };
+
+
+  console.log("===== NEW TRAVEL ENQUIRY =====");
+  console.log(enquiry);
+  console.log("==============================");
+
+
+  // optional save in browser
+  let oldQueries = JSON.parse(localStorage.getItem("queries")) || [];
+
+  oldQueries.push(enquiry);
+
+  localStorage.setItem(
+    "queries",
+    JSON.stringify(oldQueries)
+  );
+
+
+  // clear form
+
+  [
+    'inqName',
+    'inqPhone',
+    'inqEmail',
+    'inqTravellers',
+    'inqFrom',
+    'inqTo',
+    'inqMsg'
+  ]
+  .forEach(id=>{
+    document.getElementById(id).value="";
+  });
+
+
+  showToast(
+    "✅ Query sent! Our agent will contact you within 24 hours."
+  );
+
 }
 
 document.querySelector(".guide-btn").addEventListener("click", () => {
