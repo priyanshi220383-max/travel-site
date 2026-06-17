@@ -155,12 +155,21 @@ img {
 
 .hero-content {
     position: absolute;
-    top: 50%;
-    left: 8%;
+    /* top: 0; */
+    left: 0;
     transform: translateY(-50%);
     color: var(--white);
-    max-width: 620px;
+    /* max-width: 620px; */
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    bottom: 0;
+    width: 50%;
+    justify-content: center;
+    margin: 0 auto;
+    right: 0;
 }
 
 .hero-content h1 {
@@ -168,6 +177,7 @@ img {
     line-height: 1.2;
     margin-bottom: 18px;
     color: var(--white);
+    text-align: center;
 }
 
 .hero-content p {
