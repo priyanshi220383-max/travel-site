@@ -233,43 +233,25 @@
 <!-- ═══════════════════════════════════════════
      INQUIRY FORM
 ═══════════════════════════════════════════ -->
-<div class="inquiry-section" id="inquiry">
-  <h2>Send an Enquiry</h2>
-  <p class="sub">Our travel agent will get back to you within 24 hours.</p>
-
-  <div class="inq-grid">
-    <div class="inq-field">
-      <label>Full Name</label>
-      <input type="text" id="inqName" placeholder="Your full name">
+ <div class="inquiry-section" id="inquiry">
+    <h2>Send an Enquiry</h2>
+    <p class="sub">Our travel agent will get back to you within 24 hours.</p>
+    <div class="inq-grid">
+      <div class="inq-field"><label>Full Name</label><input type="text" id="inqName" placeholder="Your full name"></div>
+      <div class="inq-field"><label>Phone Number</label><input type="tel" id="inqPhone" placeholder="Enter 10 digit mobile number" maxlength="10" pattern="[0-9]{10}"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+      </div>
+      <div class="inq-field"><label>Email Address</label><input type="email" id="inqEmail" placeholder="you@email.com">
+      </div>
+      <div class="inq-field"><label>Number of Travellers</label><input type="number" id="inqTravellers"
+          placeholder="e.g. 4" min="1"></div>
+      <div class="inq-field"><label>Starting Date</label><input type="date" id="inqFrom" onchange="setMinEndDate()"></div>
+      <div class="inq-field"><label>Ending Date</label><input type="date" id="inqTo"></div>
+      <div class="inq-field inq-full"><label>Message</label><textarea id="inqMsg" rows="4"
+          placeholder="Tell us about your travel preferences..."></textarea></div>
     </div>
-    <div class="inq-field">
-      <label>Phone Number</label>
-      <input type="tel" id="inqPhone" placeholder="+91 00000 00000">
-    </div>
-    <div class="inq-field">
-      <label>Email Address</label>
-      <input type="email" id="inqEmail" placeholder="you@email.com">
-    </div>
-    <div class="inq-field">
-      <label>Number of Travellers</label>
-      <input type="number" id="inqTravellers" placeholder="e.g. 4" min="1">
-    </div>
-    <div class="inq-field">
-      <label>Starting Date</label>
-      <input type="date" id="inqFrom">
-    </div>
-    <div class="inq-field">
-      <label>Ending Date</label>
-      <input type="date" id="inqTo">
-    </div>
-    <div class="inq-field inq-full">
-      <label>Message</label>
-      <textarea id="inqMsg" rows="4" placeholder="Tell us about your travel preferences, any special requirements..."></textarea>
-    </div>
+    <button class="inq-submit" onclick="submitInquiry()">Send Enquiry →</button>
   </div>
-
-  <button class="inq-submit" onclick="submitInquiry()">Send Enquiry →</button>
-</div>
  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-container">
@@ -508,7 +490,14 @@ document.querySelector(".save-btn").addEventListener("click", () => {
 });
 
 /* ── INQUIRY FORM ── */
-function submitInquiry() {
+ function setMinEndDate(){
+
+  const fromDate = document.getElementById("inqFrom").value;
+
+  document.getElementById("inqTo").min = fromDate;
+
+}
+    function submitInquiry() {
 
   const n  = document.getElementById('inqName').value.trim();
   const ph = document.getElementById('inqPhone').value.trim();
@@ -524,10 +513,10 @@ function submitInquiry() {
     return;
   }
 
-  if (!ph || ph.length < 7) {
-    showToast("⚠️ Please enter a valid phone number.");
-    return;
-  }
+  if (!ph || ph.length !== 10 || isNaN(ph)) {
+  showToast("⚠️ Phone number must be exactly 10 digits.");
+  return;
+}
 
   if (!em || !em.includes('@')) {
     showToast("⚠️ Please enter a valid email address.");
@@ -544,10 +533,10 @@ function submitInquiry() {
     return;
   }
 
-  if (!to) {
-    showToast("⚠️ Select ending date.");
-    return;
-  }
+  if (new Date(to) <= new Date(fr)) {
+  showToast("⚠️ Ending date must be after starting date.");
+  return;
+}
 
 
   // THIS WILL SHOW QUERY IN CONSOLE
@@ -560,7 +549,7 @@ function submitInquiry() {
     startDate: fr,
     endDate: to,
     message: msg,
-    destination: "Gairsain",
+    destination: "badrinath",
     time: new Date().toLocaleString()
 
   };

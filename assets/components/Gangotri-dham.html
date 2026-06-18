@@ -207,7 +207,7 @@
         </div>
       </div>
       <div class="guide-card"><img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Uttarkashi_town.jpg/640px-Uttarkashi_town.jpg"
+          src="https://i.pinimg.com/736x/c0/5f/05/c05f05f6970fff46c8532c6622dcbce9.jpg"
           alt="Uttarkashi Stopover">
         <div class="guide-content">
           <h3>Uttarkashi Stopover</h3>
@@ -217,24 +217,27 @@
       </div>
     </div>
   </div>
-  <div class="inquiry-section" id="inquiry">
+  <!-- inquiry form -->
+   <div class="inquiry-section" id="inquiry">
     <h2>Send an Enquiry</h2>
     <p class="sub">Our travel agent will get back to you within 24 hours.</p>
     <div class="inq-grid">
       <div class="inq-field"><label>Full Name</label><input type="text" id="inqName" placeholder="Your full name"></div>
-      <div class="inq-field"><label>Phone Number</label><input type="tel" id="inqPhone" placeholder="+91 00000 00000">
+      <div class="inq-field"><label>Phone Number</label><input type="tel" id="inqPhone" placeholder="Enter 10 digit mobile number" maxlength="10" pattern="[0-9]{10}"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')">
       </div>
       <div class="inq-field"><label>Email Address</label><input type="email" id="inqEmail" placeholder="you@email.com">
       </div>
       <div class="inq-field"><label>Number of Travellers</label><input type="number" id="inqTravellers"
           placeholder="e.g. 4" min="1"></div>
-      <div class="inq-field"><label>Starting Date</label><input type="date" id="inqFrom"></div>
+      <div class="inq-field"><label>Starting Date</label><input type="date" id="inqFrom" onchange="setMinEndDate()"></div>
       <div class="inq-field"><label>Ending Date</label><input type="date" id="inqTo"></div>
       <div class="inq-field inq-full"><label>Message</label><textarea id="inqMsg" rows="4"
           placeholder="Tell us about your travel preferences..."></textarea></div>
     </div>
     <button class="inq-submit" onclick="submitInquiry()">Send Enquiry →</button>
   </div>
+  <!-- offcanvas -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="pkgOffcanvas">
     <div class="offcanvas-header border-bottom">
       <h5 class="offcanvas-title" style="color:#0b1354;font-weight:800;">Package Details</h5>
@@ -331,6 +334,13 @@
       document.getElementById('btnItinerary').classList.toggle('active', tab === 'itinerary');
       document.getElementById('btnInclusion').classList.toggle('active', tab === 'inclusion');
     }
+    function setMinEndDate(){
+
+  const fromDate = document.getElementById("inqFrom").value;
+
+  document.getElementById("inqTo").min = fromDate;
+
+}
     function submitInquiry() {
 
   const n  = document.getElementById('inqName').value.trim();
@@ -347,10 +357,10 @@
     return;
   }
 
-  if (!ph || ph.length < 7) {
-    showToast("⚠️ Please enter a valid phone number.");
-    return;
-  }
+  if (!ph || ph.length !== 10 || isNaN(ph)) {
+  showToast("⚠️ Phone number must be exactly 10 digits.");
+  return;
+}
 
   if (!em || !em.includes('@')) {
     showToast("⚠️ Please enter a valid email address.");
@@ -367,10 +377,10 @@
     return;
   }
 
-  if (!to) {
-    showToast("⚠️ Select ending date.");
-    return;
-  }
+  if (new Date(to) <= new Date(fr)) {
+  showToast("⚠️ Ending date must be after starting date.");
+  return;
+}
 
 
   // THIS WILL SHOW QUERY IN CONSOLE
@@ -383,7 +393,7 @@
     startDate: fr,
     endDate: to,
     message: msg,
-    destination: "Gairsain",
+    destination: "Gangotri-dham",
     time: new Date().toLocaleString()
 
   };
