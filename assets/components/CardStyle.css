@@ -431,7 +431,7 @@ tr:hover td { background: #fafbff; }
 
 .offcanvas-pkg-img {
   width: 100%;
-  height: 230px;
+  height: 500px;
   object-fit: cover;
   border-radius: var(--radius-md);
   margin-bottom: 18px;
