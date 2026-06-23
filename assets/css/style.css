@@ -111,23 +111,25 @@ img {
 }
 
 .dropdown-menu {
-    background: var(--navy);
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    padding: 8px 0;
+  background: var(--navy);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 6px 0;
 }
 
 .dropdown-item {
-    color: var(--light-gray);
-    font-size: 14px;
-    padding: 8px 18px;
+  color: var(--light-gray);
+  font-size: 14px;
+  padding: 9px 18px;
+  transition: background var(--transition);
 }
 
 .dropdown-item:hover {
-    background: var(--navy-light);
-    color: var(--white);
+  background: var(--navy-light);
+  color: var(--white);
 }
+
 
 /* ==========================
    Hero Section
