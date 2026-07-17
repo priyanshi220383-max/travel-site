@@ -4,40 +4,29 @@ var agents = [
   { name: "Priya Verma",  rating: "4.9 ★", exp: "8 Years",  fee: "₹3,500", contact: "+91 98765 43211", avail: false },
   { name: "Amit Singh",   rating: "4.7 ★", exp: "6 Years",  fee: "₹3,000", contact: "+91 98765 43212", avail: true  },
   { name: "Sneha Iyer",   rating: "4.6 ★", exp: "4 Years",  fee: "₹2,200", contact: "+91 98765 43213", avail: true  },
-  { name: "Karan Mehta",  rating: "4.9 ★", exp: "10 Years", fee: "₹4,000", contact: "+91 98765 43214", avail: false }
+  { name: "Karan Mehta",  rating: "4.9 ★", exp: "10 Years", fee: "₹4,000", contact: "+91 98765 43214", avail: false },
+  { name: "Aditya Rawat", rating: "5.0 ★", exp: "10 Years", fee: "₹3,800", contact: "+91 98765 43215", avail: true  }
+  // Note: Aditya Rawat's contact number was a duplicate of Karan Mehta's in the original file — fixed above.
 ];
 
 // ===== Selected Agent Variable =====
-// FIX: Removed "export" — plain script tags don't support ES module exports
 var selectedAgent = null;
 
 // ===== Get Elements =====
-var activitiesSection = document.getElementById("activitiesSection");
-var agentSection      = document.getElementById("agentSection");
 var agentCards        = document.getElementById("agentCards");
 var tripForm          = document.getElementById("tripForm");
 var confirmationCard  = document.getElementById("confirmationCard");
 var cancelBtn         = document.getElementById("cancelBtn");
+var fromDateInput     = document.getElementById("fromDate");
+var toDateInput       = document.getElementById("toDate");
 
-// ===== Radio Button Change =====
-var radios = document.querySelectorAll('input[name="planType"]');
-
-radios.forEach(function(radio) {
-  radio.addEventListener("change", function() {
-    activitiesSection.classList.add("hidden");
-    agentSection.classList.add("hidden");
-    confirmationCard.classList.add("hidden");
-    cancelBtn.classList.add("hidden");
-    selectedAgent = null;
-
-    if (this.value === "self") {
-      activitiesSection.classList.remove("hidden");
-    }
-    if (this.value === "agent") {
-      agentSection.classList.remove("hidden");
-      showAgentCards();
-    }
-  });
+// ===== Restrict To Date based on From Date =====
+fromDateInput.addEventListener("change", function() {
+  toDateInput.min = this.value;
+  // If a to-date was already picked and is now before the from-date, clear it
+  if (toDateInput.value && toDateInput.value < this.value) {
+    toDateInput.value = "";
+  }
 });
 
 // ===== Show Agent Cards =====
@@ -75,40 +64,23 @@ function showAgentCards() {
   }
 }
 
+// Show agent cards immediately since agent booking is now the only flow
+showAgentCards();
+
 // ===== Form Submit =====
 tripForm.addEventListener("submit", function(e) {
   e.preventDefault();
 
   var destination = document.getElementById("destination").value.trim();
   var email       = document.getElementById("email").value.trim();
-  var fromDate    = document.getElementById("fromDate").value;
-  var toDate      = document.getElementById("toDate").value;
-  var planType    = document.querySelector('input[name="planType"]:checked');
+  var fromDate    = fromDateInput.value;
+  var toDate      = toDateInput.value;
 
   if (!destination) { alert("Please enter a destination."); return; }
   if (!email)        { alert("Please enter your email."); return; }
   if (!fromDate)     { alert("Please select a from date."); return; }
   if (!toDate)       { alert("Please select a to date."); return; }
-  if (!planType)     { alert("Please select a planning type."); return; }
-  if (planType.value === "agent" && !selectedAgent) {
-    alert("Please select an agent.");
-    return;
-  }
-
-  // Auto-assign first available agent for self-plan
-  if (planType.value === "self") {
-    for (var i = 0; i < agents.length; i++) {
-      if (agents[i].avail) { selectedAgent = agents[i]; break; }
-    }
-  }
-
-  // FIX: Removed "export" from var activities — same issue as selectedAgent
-  var activities = [];
-  document.querySelectorAll("#activitiesSection input[type='checkbox']:checked").forEach(function(cb) {
-    activities.push(cb.value);
-  });
-
-  var activitiesText = activities.length > 0 ? activities.join(", ") : "None selected";
+  if (!selectedAgent) { alert("Please select an agent."); return; }
 
   confirmationCard.innerHTML =
     "<h3>✅ Booking Confirmed!</h3>" +
@@ -116,8 +88,6 @@ tripForm.addEventListener("submit", function(e) {
     "<p>Email: <span>" + email + "</span></p>" +
     "<p>From: <span>" + fromDate + "</span></p>" +
     "<p>To: <span>" + toDate + "</span></p>" +
-    "<p>Plan Type: <span>" + (planType.value === "self" ? "Plan Yourself" : "Through Agent") + "</span></p>" +
-    (planType.value === "self" ? "<p>Activities: <span>" + activitiesText + "</span></p>" : "") +
     "<hr style='border-color:rgba(255,255,255,0.15); margin:12px 0'>" +
     "<p>Agent Name: <span>" + selectedAgent.name + "</span></p>" +
     "<p>Contact: <span>" + selectedAgent.contact + "</span></p>" +
@@ -128,14 +98,44 @@ tripForm.addEventListener("submit", function(e) {
   cancelBtn.classList.remove("hidden");
   confirmationCard.scrollIntoView({ behavior: "smooth" });
 
-  localStorage.setItem("tripBooking", JSON.stringify({
+  var bookingData = {
     destination: destination,
     email: email,
     fromDate: fromDate,
     toDate: toDate,
-    activities: activities,
-    agent: selectedAgent
-  }));
+    agent: selectedAgent,
+    bookingTime: new Date().toLocaleString(),
+    status: "Pending"
+  };
+
+  console.log("===== NEW TRIP BOOKING =====");
+  console.log(bookingData);
+
+  localStorage.setItem("tripBooking", JSON.stringify(bookingData));
+
+  // Send booking data to backend
+  // Note: this only works if your backend server is running locally on port 5000.
+  // If it isn't running, the .catch() below will log a connection error — that's expected.
+  fetch("http://localhost:5000/api/trip-booking", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(bookingData)
+  })
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error("Server responded with status " + response.status);
+    }
+    return response.json();
+  })
+  .then(function(data) {
+    console.log("Response from Backend:");
+    console.log(data);
+  })
+  .catch(function(error) {
+    console.error("Error connecting to backend:", error);
+  });
 });
 
 // ===== Cancel Button =====
@@ -144,9 +144,11 @@ cancelBtn.addEventListener("click", function() {
   confirmationCard.classList.add("hidden");
   cancelBtn.classList.add("hidden");
   tripForm.reset();
-  activitiesSection.classList.add("hidden");
-  agentSection.classList.add("hidden");
+  toDateInput.min = "";
   selectedAgent = null;
+  document.querySelectorAll(".agent-card").forEach(function(c) {
+    c.classList.remove("selected");
+  });
   alert("Your itinerary has been cancelled.");
 });
 
@@ -156,14 +158,7 @@ window.addEventListener("DOMContentLoaded", function() {
   if (saved) {
     var b = JSON.parse(saved);
     confirmationCard.innerHTML =
-      "<h3>🔖 Previous Booking Found</h3>" +
-      "<p>Destination: <span>" + b.destination + "</span></p>" +
-      "<p>Email: <span>" + b.email + "</span></p>" +
-      "<p>From: <span>" + b.fromDate + "</span></p>" +
-      "<p>To: <span>" + b.toDate + "</span></p>" +
-      (b.activities && b.activities.length > 0 ? "<p>Activities: <span>" + b.activities.join(", ") + "</span></p>" : "") +
-      (b.agent ? "<p>Agent: <span>" + b.agent.name + " — " + b.agent.contact + "</span></p>" : "") +
-      "<div class='alert-msg'>ℹ️ This booking was loaded from your last session.</div>";
+      `<h3>🔖 Previous Booking Found</h3><p>Destination: <span>${b.destination}</span></p><p>Email: <span>${b.email}</span></p><p>From: <span>${b.fromDate}</span></p><p>To: <span>${b.toDate}</span></p>${b.agent ? "<p>Agent: <span>" + b.agent.name + " — " + b.agent.contact + "</span></p>" : ""}<div class='alert-msg'>ℹ️ This booking was loaded from your last session.</div>`;
     confirmationCard.classList.remove("hidden");
     cancelBtn.classList.remove("hidden");
   }
@@ -279,4 +274,3 @@ window.onclick = function(event) {
 document.addEventListener("keydown", function(e) {
   if (e.key === "Escape") { closeModal(); }
 });
-

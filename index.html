@@ -313,9 +313,9 @@
       </div>
     </div>
   </section>
-  <!-- ===== ITINERARY ===== -->
-  <!-- FIX: Removed the nested <!DOCTYPE html><html><head><body> tags that were incorrectly pasted inside here -->
-  <section id="itinerary">
+  <!-- ===== ITINERARY FORM ===== -->
+  
+ <section id="itinerary">
     <h2>Plan Your Trip</h2>
 
     <form id="tripForm">
@@ -332,32 +332,8 @@
       <label>To Date:</label>
       <input type="date" id="toDate">
 
-      <label>Planning Type:</label>
-      <div style="margin-bottom:18px;">
-        <input type="radio" name="planType" value="self" id="rbSelf">
-        <label for="rbSelf">Plan Yourself</label>
-        &nbsp;&nbsp;
-        <input type="radio" name="planType" value="agent" id="rbAgent">
-        <label for="rbAgent">Plan Through Agent</label>
-      </div>
-
-      <!-- Activities Section -->
-      <div id="activitiesSection" class="hidden">
-        <h3>Select Activities</h3>
-        <label><input type="checkbox" value="Trekking"> Trekking</label>
-        <label><input type="checkbox" value="Sightseeing"> Sightseeing</label>
-        <label><input type="checkbox" value="Shopping"> Shopping</label>
-        <label><input type="checkbox" value="Camping"> Camping</label>
-        <label><input type="checkbox" value="Local Food Tour"> Local Food Tour</label>
-        <label><input type="checkbox" value="Adventure Sports"> Adventure Sports</label>
-        <label><input type="checkbox" value="Photography"> Photography</label>
-        <label><input type="checkbox" value="Beach Activities"> Beach Activities</label>
-        <label><input type="checkbox" value="Wildlife Safari"> Wildlife Safari</label>
-        <label><input type="checkbox" value="Cycling"> Cycling</label>
-      </div>
-
       <!-- Agent Cards Section -->
-      <div id="agentSection" class="hidden">
+      <div id="agentSection">
         <h3>Select an Agent</h3>
         <div id="agentCards"></div>
       </div>

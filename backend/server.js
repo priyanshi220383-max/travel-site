@@ -1,13 +1,20 @@
+const cors = require("cors");
 const express = require("express");
 
 const app = express();
+app.use(cors());
 
 const PORT = 5000;
 
-app.get("/", (req, res) => {
-    res.send("Welcome to TripDen Backend!");
-});
+// Middleware
+app.use(express.json());
+
+// Import Routes
+const testRoutes = require("./routes/testRoutes");
+
+// Use Routes
+app.use("/api", testRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
