@@ -16,5 +16,5 @@ const testRoutes = require("./routes/testRoutes");
 app.use("/api", testRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
