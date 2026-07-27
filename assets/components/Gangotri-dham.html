@@ -289,7 +289,7 @@
         <ul>
           <li><a href="#">Help Center</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Privacy Pvolicy</a></li>
           <li><a href="#">Terms &amp; Conditions</a></li>
         </ul>
       </div>
@@ -402,6 +402,28 @@
   console.log("===== NEW TRAVEL ENQUIRY =====");
   console.log(enquiry);
   console.log("==============================");
+     fetch("http://localhost:5000/api/enquiry", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(enquiry)
+})
+.then(function(response) {
+  if (!response.ok) {
+    throw new Error("Server Error");
+  }
+  return response.json();
+})
+.then(function(data) {
+  console.log("Response from Backend:");
+  console.log(data);
+})
+.catch(function(error) {
+  console.error("Error:", error);
+});
+
+
 
 
   // optional save in browser
