@@ -1,6 +1,6 @@
 const express = require("express");
-
 const router = express.Router();
+const db = require("../db");
 
 // Test Route
 router.get("/test", (req, res) => {
@@ -9,46 +9,96 @@ router.get("/test", (req, res) => {
     });
 });
 
-// Trip Booking Route
+// =========================
+// Trip Booking
+// =========================
 router.post("/trip-booking", (req, res) => {
 
-    console.log("========== NEW BOOKING ==========");
-    console.log(req.body);
-    console.log("=================================");
+    const booking = req.body;
 
-    res.json({
-        success: true,
-        message: "Booking received successfully!"
+    const sql = `
+    INSERT INTO bookings
+    (destination,email,fromDate,toDate,agentName,agentContact,agentFee,bookingTime,status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+        booking.destination,
+        booking.email,
+        booking.fromDate,
+        booking.toDate,
+        booking.agent.name,
+        booking.agent.contact,
+        booking.agent.fee,
+        booking.bookingTime,
+        booking.status
+    ];
+
+    db.query(sql, values, (err) => {
+
+        if (err) {
+            console.log(err);
+
+            return res.status(500).json({
+                success: false,
+                message: "Database Error"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Booking saved successfully!"
+        });
+
     });
 
 });
-// Destination Enquiry Route
+
+// =========================
+// Destination Enquiry
+// =========================
 router.post("/enquiry", (req, res) => {
 
-    console.log("========== NEW TRAVEL ENQUIRY ==========");
-    console.log(req.body);
-    console.log("=========================================");
-    fetch("http://localhost:5000/api/enquiry", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(enquiry)
-})
-.then(function(response) {
-  return response.json();
-})
-.then(function(data) {
-  console.log("Response from Backend:");
-  console.log(data);
-})
-.catch(function(error) {
-  console.error("Error connecting to backend:", error);
-});
+    const {
+        name,
+        phone,
+        email,
+        travellers,
+        startDate,
+        destination
+    } = req.body;
 
-    res.json({
-        success: true,
-        message: "Enquiry received successfully!"
+    const sql = `
+    INSERT INTO enquiries
+    (name, phone, email, travellers, startDate, destination)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+        name,
+        phone,
+        email,
+        travellers,
+        startDate,
+        destination
+    ];
+
+    db.query(sql, values, (err) => {
+
+        if (err) {
+            console.log(err);
+
+            return res.status(500).json({
+                success: false,
+                message: "Database Error"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Enquiry Saved Successfully!"
+        });
+
     });
 
 });
